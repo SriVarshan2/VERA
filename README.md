@@ -13,6 +13,8 @@
 </p>
 
 > **VERA** is a self-hosted, event-sourced hackathon submission and judging platform designed to eliminate bias and produce mathematically defensible ranks.
+> 
+> 🔴 **Live Demo:** [https://vera-three-self.vercel.app](https://vera-three-self.vercel.app)
 
 ## 🚀 Quick Links
 - [How Scoring Works](#-how-scoring-works)
