@@ -1,0 +1,653 @@
+================================================================================
+               VERA CALIBRATION & RANK STABILITY PROOF REPORT                   
+================================================================================
+
+EVENT: VERA Global Hackathon 2026
+TOTAL SUBMISSIONS EVALUATED: 40
+
+--------------------------------------------------------------------------------
+                APPLES-TO-APPLES SUBMISSION EVALUATION COMPARISON               
+--------------------------------------------------------------------------------
+
+📌 Project: "Aether Engine - Local Neural Inference" (Team NeuralCraft)
+   Track: AI & Machine Learning
+   • Simple Unweighted Average:   77.45%  (Rank #1)
+   • VERA Calibrated Score:        77.15%  (Rank #1) [Calibration Shift: -0.3%]
+   • Hard Exclusion Score:         76.06%  (Rank #16)
+   ℹ️ STABLE POSITION: Rank #1 across unweighted and calibrated models
+   Judge Evaluation Breakdown:
+     - Dr. Sarah Chen (Senior AI Researcher): Raw 74.5% | Weight 1x [NORMAL]
+     - Marcus Vance (Systems Architect - Planted Bad Judge): Raw 80% | Weight 0.56x [FLAGS: LOW_VARIANCE, FATIGUE]
+     - Elena Rostova (VC Technical Partner): Raw 86% | Weight 0.8x [FLAGS: FATIGUE]
+     - Judge 04: Raw 74% | Weight 1x [NORMAL]
+     - Judge 08: Raw 80% | Weight 1x [NORMAL]
+     - Judge 12: Raw 80% | Weight 1x [NORMAL]
+     - Judge 16: Raw 72% | Weight 1x [NORMAL]
+     - Judge 20: Raw 74% | Weight 1x [NORMAL]
+     - Judge 24: Raw 74% | Weight 1x [NORMAL]
+     - Judge 28: Raw 80% | Weight 1x [NORMAL]
+
+📌 Project: "PayStream - Micro-payroll Engine" (Team PayStreamTeam)
+   Track: Fintech & Open Finance
+   • Simple Unweighted Average:   77.14%  (Rank #2)
+   • VERA Calibrated Score:        77.14%  (Rank #2) [Calibration Shift: 0%]
+   • Hard Exclusion Score:         77.14%  (Rank #2)
+   ℹ️ STABLE POSITION: Rank #2 across unweighted and calibrated models
+   Judge Evaluation Breakdown:
+     - Judge 04: Raw 80% | Weight 1x [NORMAL]
+     - Judge 08: Raw 80% | Weight 1x [NORMAL]
+     - Judge 12: Raw 72% | Weight 1x [NORMAL]
+     - Judge 16: Raw 74% | Weight 1x [NORMAL]
+     - Judge 20: Raw 74% | Weight 1x [NORMAL]
+     - Judge 24: Raw 80% | Weight 1x [NORMAL]
+     - Judge 28: Raw 80% | Weight 1x [NORMAL]
+
+📌 Project: "AgentFlow - Autonomous Workflow Designer" (Team AgentFlowTeam)
+   Track: AI & Machine Learning
+   • Simple Unweighted Average:   77.14%  (Rank #3)
+   • VERA Calibrated Score:        77.14%  (Rank #3) [Calibration Shift: 0%]
+   • Hard Exclusion Score:         77.14%  (Rank #3)
+   ℹ️ STABLE POSITION: Rank #3 across unweighted and calibrated models
+   Judge Evaluation Breakdown:
+     - Judge 04: Raw 80% | Weight 1x [NORMAL]
+     - Judge 08: Raw 80% | Weight 1x [NORMAL]
+     - Judge 12: Raw 72% | Weight 1x [NORMAL]
+     - Judge 16: Raw 74% | Weight 1x [NORMAL]
+     - Judge 20: Raw 74% | Weight 1x [NORMAL]
+     - Judge 24: Raw 80% | Weight 1x [NORMAL]
+     - Judge 28: Raw 80% | Weight 1x [NORMAL]
+
+📌 Project: "ZeroYield - Automated DeFi Risk Analyzer" (Team ZeroYield)
+   Track: Fintech & Open Finance
+   • Simple Unweighted Average:   76.67%  (Rank #4)
+   • VERA Calibrated Score:        76.67%  (Rank #4) [Calibration Shift: 0%]
+   • Hard Exclusion Score:         76.67%  (Rank #4)
+   ℹ️ STABLE POSITION: Rank #4 across unweighted and calibrated models
+   Judge Evaluation Breakdown:
+     - Judge 07: Raw 80% | Weight 1x [NORMAL]
+     - Judge 11: Raw 72% | Weight 1x [NORMAL]
+     - Judge 15: Raw 74% | Weight 1x [NORMAL]
+     - Judge 19: Raw 74% | Weight 1x [NORMAL]
+     - Judge 23: Raw 80% | Weight 1x [NORMAL]
+     - Judge 27: Raw 80% | Weight 1x [NORMAL]
+
+📌 Project: "OpenClass - Interactive Peer-to-Peer Math Labs" (Team OpenClass)
+   Track: Education & EdTech
+   • Simple Unweighted Average:   76.67%  (Rank #5)
+   • VERA Calibrated Score:        76.67%  (Rank #5) [Calibration Shift: 0%]
+   • Hard Exclusion Score:         76.67%  (Rank #5)
+   ℹ️ STABLE POSITION: Rank #5 across unweighted and calibrated models
+   Judge Evaluation Breakdown:
+     - Judge 06: Raw 80% | Weight 1x [NORMAL]
+     - Judge 10: Raw 80% | Weight 1x [NORMAL]
+     - Judge 14: Raw 72% | Weight 1x [NORMAL]
+     - Judge 18: Raw 74% | Weight 1x [NORMAL]
+     - Judge 22: Raw 74% | Weight 1x [NORMAL]
+     - Judge 26: Raw 80% | Weight 1x [NORMAL]
+
+📌 Project: "MedFlow - Emergency Room Triage Optimizer" (Team MedFlowTeam)
+   Track: Healthcare & Biotech
+   • Simple Unweighted Average:   76.67%  (Rank #6)
+   • VERA Calibrated Score:        76.67%  (Rank #6) [Calibration Shift: 0%]
+   • Hard Exclusion Score:         76.67%  (Rank #6)
+   ℹ️ STABLE POSITION: Rank #6 across unweighted and calibrated models
+   Judge Evaluation Breakdown:
+     - Judge 05: Raw 80% | Weight 1x [NORMAL]
+     - Judge 09: Raw 72% | Weight 1x [NORMAL]
+     - Judge 13: Raw 74% | Weight 1x [NORMAL]
+     - Judge 17: Raw 74% | Weight 1x [NORMAL]
+     - Judge 21: Raw 80% | Weight 1x [NORMAL]
+     - Judge 25: Raw 80% | Weight 1x [NORMAL]
+
+📌 Project: "CodeMentor - AI Tutor for CS Students" (Team CodeMentorTeam)
+   Track: Education & EdTech
+   • Simple Unweighted Average:   76.67%  (Rank #7)
+   • VERA Calibrated Score:        76.67%  (Rank #7) [Calibration Shift: 0%]
+   • Hard Exclusion Score:         76.67%  (Rank #7)
+   ℹ️ STABLE POSITION: Rank #7 across unweighted and calibrated models
+   Judge Evaluation Breakdown:
+     - Judge 07: Raw 80% | Weight 1x [NORMAL]
+     - Judge 11: Raw 80% | Weight 1x [NORMAL]
+     - Judge 15: Raw 72% | Weight 1x [NORMAL]
+     - Judge 19: Raw 74% | Weight 1x [NORMAL]
+     - Judge 23: Raw 74% | Weight 1x [NORMAL]
+     - Judge 27: Raw 80% | Weight 1x [NORMAL]
+
+📌 Project: "L2Bridge - Trustless Rollup Relay" (Team L2BridgeTeam)
+   Track: Web3 & Decentralized
+   • Simple Unweighted Average:   76.67%  (Rank #8)
+   • VERA Calibrated Score:        76.67%  (Rank #8) [Calibration Shift: 0%]
+   • Hard Exclusion Score:         76.67%  (Rank #8)
+   ℹ️ STABLE POSITION: Rank #8 across unweighted and calibrated models
+   Judge Evaluation Breakdown:
+     - Judge 06: Raw 80% | Weight 1x [NORMAL]
+     - Judge 10: Raw 72% | Weight 1x [NORMAL]
+     - Judge 14: Raw 74% | Weight 1x [NORMAL]
+     - Judge 18: Raw 74% | Weight 1x [NORMAL]
+     - Judge 22: Raw 80% | Weight 1x [NORMAL]
+     - Judge 26: Raw 80% | Weight 1x [NORMAL]
+
+📌 Project: "GeneScan - Variant Effect Predictor" (Team GeneScanTeam)
+   Track: Healthcare & Biotech
+   • Simple Unweighted Average:   76.67%  (Rank #9)
+   • VERA Calibrated Score:        76.67%  (Rank #9) [Calibration Shift: 0%]
+   • Hard Exclusion Score:         76.67%  (Rank #9)
+   ℹ️ STABLE POSITION: Rank #9 across unweighted and calibrated models
+   Judge Evaluation Breakdown:
+     - Judge 05: Raw 80% | Weight 1x [NORMAL]
+     - Judge 09: Raw 80% | Weight 1x [NORMAL]
+     - Judge 13: Raw 72% | Weight 1x [NORMAL]
+     - Judge 17: Raw 74% | Weight 1x [NORMAL]
+     - Judge 21: Raw 74% | Weight 1x [NORMAL]
+     - Judge 25: Raw 80% | Weight 1x [NORMAL]
+
+📌 Project: "AgriSense - Crop Yield Sensor Network" (Team AgriSenseTeam)
+   Track: Social Impact
+   • Simple Unweighted Average:   76.67%  (Rank #10)
+   • VERA Calibrated Score:        76.67%  (Rank #10) [Calibration Shift: 0%]
+   • Hard Exclusion Score:         76.67%  (Rank #10)
+   ℹ️ STABLE POSITION: Rank #10 across unweighted and calibrated models
+   Judge Evaluation Breakdown:
+     - Judge 07: Raw 80% | Weight 1x [NORMAL]
+     - Judge 11: Raw 72% | Weight 1x [NORMAL]
+     - Judge 15: Raw 74% | Weight 1x [NORMAL]
+     - Judge 19: Raw 74% | Weight 1x [NORMAL]
+     - Judge 23: Raw 80% | Weight 1x [NORMAL]
+     - Judge 27: Raw 80% | Weight 1x [NORMAL]
+
+📌 Project: "Starlight - Decentralized Storage Node" (Team StarlightTeam)
+   Track: Web3 & Decentralized
+   • Simple Unweighted Average:   76.67%  (Rank #11)
+   • VERA Calibrated Score:        76.67%  (Rank #11) [Calibration Shift: 0%]
+   • Hard Exclusion Score:         76.67%  (Rank #11)
+   ℹ️ STABLE POSITION: Rank #11 across unweighted and calibrated models
+   Judge Evaluation Breakdown:
+     - Judge 06: Raw 80% | Weight 1x [NORMAL]
+     - Judge 10: Raw 80% | Weight 1x [NORMAL]
+     - Judge 14: Raw 72% | Weight 1x [NORMAL]
+     - Judge 18: Raw 74% | Weight 1x [NORMAL]
+     - Judge 22: Raw 74% | Weight 1x [NORMAL]
+     - Judge 26: Raw 80% | Weight 1x [NORMAL]
+
+📌 Project: "MockAPI - Instant REST & GraphQL Mocks" (Team MockAPITeam)
+   Track: Developer Tools
+   • Simple Unweighted Average:   76.67%  (Rank #12)
+   • VERA Calibrated Score:        76.67%  (Rank #12) [Calibration Shift: 0%]
+   • Hard Exclusion Score:         76.67%  (Rank #12)
+   ℹ️ STABLE POSITION: Rank #12 across unweighted and calibrated models
+   Judge Evaluation Breakdown:
+     - Judge 05: Raw 80% | Weight 1x [NORMAL]
+     - Judge 09: Raw 72% | Weight 1x [NORMAL]
+     - Judge 13: Raw 74% | Weight 1x [NORMAL]
+     - Judge 17: Raw 74% | Weight 1x [NORMAL]
+     - Judge 21: Raw 80% | Weight 1x [NORMAL]
+     - Judge 25: Raw 80% | Weight 1x [NORMAL]
+
+📌 Project: "SolarShare - P2P Solar Energy Trading" (Team SolarShareTeam)
+   Track: Social Impact
+   • Simple Unweighted Average:   76.67%  (Rank #13)
+   • VERA Calibrated Score:        76.67%  (Rank #13) [Calibration Shift: 0%]
+   • Hard Exclusion Score:         76.67%  (Rank #13)
+   ℹ️ STABLE POSITION: Rank #13 across unweighted and calibrated models
+   Judge Evaluation Breakdown:
+     - Judge 07: Raw 80% | Weight 1x [NORMAL]
+     - Judge 11: Raw 80% | Weight 1x [NORMAL]
+     - Judge 15: Raw 72% | Weight 1x [NORMAL]
+     - Judge 19: Raw 74% | Weight 1x [NORMAL]
+     - Judge 23: Raw 74% | Weight 1x [NORMAL]
+     - Judge 27: Raw 80% | Weight 1x [NORMAL]
+
+📌 Project: "Aether Engine - Local Neural Inference (Duplicate Draft) (Duplicate Draft)" (Team NeuralCraft)
+   Track: AI & Machine Learning
+   • Simple Unweighted Average:   76.67%  (Rank #14)
+   • VERA Calibrated Score:        76.67%  (Rank #14) [Calibration Shift: 0%]
+   • Hard Exclusion Score:         76.67%  (Rank #14)
+   ℹ️ STABLE POSITION: Rank #14 across unweighted and calibrated models
+   Judge Evaluation Breakdown:
+     - Judge 06: Raw 80% | Weight 1x [NORMAL]
+     - Judge 10: Raw 72% | Weight 1x [NORMAL]
+     - Judge 14: Raw 74% | Weight 1x [NORMAL]
+     - Judge 18: Raw 74% | Weight 1x [NORMAL]
+     - Judge 22: Raw 80% | Weight 1x [NORMAL]
+     - Judge 26: Raw 80% | Weight 1x [NORMAL]
+
+📌 Project: "LedgerSync - Cross-Border Payment Router" (Team LedgerSyncTeam)
+   Track: Fintech & Open Finance
+   • Simple Unweighted Average:   76.29%  (Rank #15)
+   • VERA Calibrated Score:        76.29%  (Rank #15) [Calibration Shift: 0%]
+   • Hard Exclusion Score:         76.29%  (Rank #15)
+   ℹ️ STABLE POSITION: Rank #15 across unweighted and calibrated models
+   Judge Evaluation Breakdown:
+     - Judge 04: Raw 74% | Weight 1x [NORMAL]
+     - Judge 08: Raw 80% | Weight 1x [NORMAL]
+     - Judge 12: Raw 80% | Weight 1x [NORMAL]
+     - Judge 16: Raw 72% | Weight 1x [NORMAL]
+     - Judge 20: Raw 74% | Weight 1x [NORMAL]
+     - Judge 24: Raw 74% | Weight 1x [NORMAL]
+     - Judge 28: Raw 80% | Weight 1x [NORMAL]
+
+📌 Project: "QuantumVault - Post-Quantum Cryptography Suite" (Team QuantumVault)
+   Track: Systems & Infrastructure
+   • Simple Unweighted Average:   76.00%  (Rank #16)
+   • VERA Calibrated Score:        76.00%  (Rank #16) [Calibration Shift: 0%]
+   • Hard Exclusion Score:         76.00%  (Rank #17)
+   ℹ️ STABLE POSITION: Rank #16 across unweighted and calibrated models
+   Judge Evaluation Breakdown:
+     - Judge 04: Raw 80% | Weight 1x [NORMAL]
+     - Judge 08: Raw 72% | Weight 1x [NORMAL]
+     - Judge 12: Raw 74% | Weight 1x [NORMAL]
+     - Judge 16: Raw 74% | Weight 1x [NORMAL]
+     - Judge 20: Raw 80% | Weight 1x [NORMAL]
+     - Judge 24: Raw 80% | Weight 1x [NORMAL]
+     - Judge 28: Raw 72% | Weight 1x [NORMAL]
+
+📌 Project: "ModelCompress - LLM Quantization Toolkit" (Team ModelCompressTeam)
+   Track: AI & Machine Learning
+   • Simple Unweighted Average:   76.00%  (Rank #17)
+   • VERA Calibrated Score:        76.00%  (Rank #17) [Calibration Shift: 0%]
+   • Hard Exclusion Score:         76.00%  (Rank #18)
+   ℹ️ STABLE POSITION: Rank #17 across unweighted and calibrated models
+   Judge Evaluation Breakdown:
+     - Judge 04: Raw 80% | Weight 1x [NORMAL]
+     - Judge 08: Raw 72% | Weight 1x [NORMAL]
+     - Judge 12: Raw 74% | Weight 1x [NORMAL]
+     - Judge 16: Raw 74% | Weight 1x [NORMAL]
+     - Judge 20: Raw 80% | Weight 1x [NORMAL]
+     - Judge 24: Raw 80% | Weight 1x [NORMAL]
+     - Judge 28: Raw 72% | Weight 1x [NORMAL]
+
+📌 Project: "Quiet Hours - Focus Shield for Engineers" (Team Nightshift)
+   Track: Developer Tools
+   • Simple Unweighted Average:   75.67%  (Rank #18)
+   • VERA Calibrated Score:        75.67%  (Rank #18) [Calibration Shift: 0%]
+   • Hard Exclusion Score:         75.67%  (Rank #19)
+   ℹ️ STABLE POSITION: Rank #18 across unweighted and calibrated models
+   Judge Evaluation Breakdown:
+     - Judge 06: Raw 74% | Weight 1x [NORMAL]
+     - Judge 10: Raw 74% | Weight 1x [NORMAL]
+     - Judge 14: Raw 80% | Weight 1x [NORMAL]
+     - Judge 18: Raw 80% | Weight 1x [NORMAL]
+     - Judge 22: Raw 72% | Weight 1x [NORMAL]
+     - Judge 26: Raw 74% | Weight 1x [NORMAL]
+
+📌 Project: "HyperLog - Fast Log Aggregator" (Team HyperLogTeam)
+   Track: Developer Tools
+   • Simple Unweighted Average:   75.67%  (Rank #19)
+   • VERA Calibrated Score:        75.67%  (Rank #19) [Calibration Shift: 0%]
+   • Hard Exclusion Score:         75.67%  (Rank #20)
+   ℹ️ STABLE POSITION: Rank #19 across unweighted and calibrated models
+   Judge Evaluation Breakdown:
+     - Judge 05: Raw 74% | Weight 1x [NORMAL]
+     - Judge 09: Raw 80% | Weight 1x [NORMAL]
+     - Judge 13: Raw 80% | Weight 1x [NORMAL]
+     - Judge 17: Raw 72% | Weight 1x [NORMAL]
+     - Judge 21: Raw 74% | Weight 1x [NORMAL]
+     - Judge 25: Raw 74% | Weight 1x [NORMAL]
+
+📌 Project: "GridPulse - Smart Grid Load Balancing" (Team GridPulseTeam)
+   Track: Social Impact
+   • Simple Unweighted Average:   75.67%  (Rank #20)
+   • VERA Calibrated Score:        75.67%  (Rank #20) [Calibration Shift: 0%]
+   • Hard Exclusion Score:         75.67%  (Rank #21)
+   ℹ️ STABLE POSITION: Rank #20 across unweighted and calibrated models
+   Judge Evaluation Breakdown:
+     - Judge 07: Raw 74% | Weight 1x [NORMAL]
+     - Judge 11: Raw 74% | Weight 1x [NORMAL]
+     - Judge 15: Raw 80% | Weight 1x [NORMAL]
+     - Judge 19: Raw 80% | Weight 1x [NORMAL]
+     - Judge 23: Raw 72% | Weight 1x [NORMAL]
+     - Judge 27: Raw 74% | Weight 1x [NORMAL]
+
+📌 Project: "VaporDB - Embedded In-Memory Cache" (Team VaporDBTeam)
+   Track: Systems & Infrastructure
+   • Simple Unweighted Average:   75.67%  (Rank #21)
+   • VERA Calibrated Score:        75.67%  (Rank #21) [Calibration Shift: 0%]
+   • Hard Exclusion Score:         75.67%  (Rank #22)
+   ℹ️ STABLE POSITION: Rank #21 across unweighted and calibrated models
+   Judge Evaluation Breakdown:
+     - Judge 06: Raw 74% | Weight 1x [NORMAL]
+     - Judge 10: Raw 80% | Weight 1x [NORMAL]
+     - Judge 14: Raw 80% | Weight 1x [NORMAL]
+     - Judge 18: Raw 72% | Weight 1x [NORMAL]
+     - Judge 22: Raw 74% | Weight 1x [NORMAL]
+     - Judge 26: Raw 74% | Weight 1x [NORMAL]
+
+📌 Project: "TraceNet - eBPF Network Visualizer" (Team TraceNetTeam)
+   Track: Developer Tools
+   • Simple Unweighted Average:   75.67%  (Rank #22)
+   • VERA Calibrated Score:        75.67%  (Rank #22) [Calibration Shift: 0%]
+   • Hard Exclusion Score:         75.67%  (Rank #23)
+   ℹ️ STABLE POSITION: Rank #22 across unweighted and calibrated models
+   Judge Evaluation Breakdown:
+     - Judge 05: Raw 74% | Weight 1x [NORMAL]
+     - Judge 09: Raw 74% | Weight 1x [NORMAL]
+     - Judge 13: Raw 80% | Weight 1x [NORMAL]
+     - Judge 17: Raw 80% | Weight 1x [NORMAL]
+     - Judge 21: Raw 72% | Weight 1x [NORMAL]
+     - Judge 25: Raw 74% | Weight 1x [NORMAL]
+
+📌 Project: "LabSim - Virtual Chemistry Simulator" (Team LabSimTeam)
+   Track: Education & EdTech
+   • Simple Unweighted Average:   75.67%  (Rank #23)
+   • VERA Calibrated Score:        75.67%  (Rank #23) [Calibration Shift: 0%]
+   • Hard Exclusion Score:         75.67%  (Rank #24)
+   ℹ️ STABLE POSITION: Rank #23 across unweighted and calibrated models
+   Judge Evaluation Breakdown:
+     - Judge 07: Raw 74% | Weight 1x [NORMAL]
+     - Judge 11: Raw 80% | Weight 1x [NORMAL]
+     - Judge 15: Raw 80% | Weight 1x [NORMAL]
+     - Judge 19: Raw 72% | Weight 1x [NORMAL]
+     - Judge 23: Raw 74% | Weight 1x [NORMAL]
+     - Judge 27: Raw 74% | Weight 1x [NORMAL]
+
+📌 Project: "KernelRider - Custom Linux Scheduler" (Team KernelRiderTeam)
+   Track: Systems & Infrastructure
+   • Simple Unweighted Average:   75.67%  (Rank #24)
+   • VERA Calibrated Score:        75.67%  (Rank #24) [Calibration Shift: 0%]
+   • Hard Exclusion Score:         75.67%  (Rank #25)
+   ℹ️ STABLE POSITION: Rank #24 across unweighted and calibrated models
+   Judge Evaluation Breakdown:
+     - Judge 06: Raw 74% | Weight 1x [NORMAL]
+     - Judge 10: Raw 74% | Weight 1x [NORMAL]
+     - Judge 14: Raw 80% | Weight 1x [NORMAL]
+     - Judge 18: Raw 80% | Weight 1x [NORMAL]
+     - Judge 22: Raw 72% | Weight 1x [NORMAL]
+     - Judge 26: Raw 74% | Weight 1x [NORMAL]
+
+📌 Project: "HeartBeat - Remote Patient Monitor" (Team HeartBeatTeam)
+   Track: Healthcare & Biotech
+   • Simple Unweighted Average:   75.67%  (Rank #25)
+   • VERA Calibrated Score:        75.67%  (Rank #25) [Calibration Shift: 0%]
+   • Hard Exclusion Score:         75.67%  (Rank #26)
+   ℹ️ STABLE POSITION: Rank #25 across unweighted and calibrated models
+   Judge Evaluation Breakdown:
+     - Judge 05: Raw 74% | Weight 1x [NORMAL]
+     - Judge 09: Raw 80% | Weight 1x [NORMAL]
+     - Judge 13: Raw 80% | Weight 1x [NORMAL]
+     - Judge 17: Raw 72% | Weight 1x [NORMAL]
+     - Judge 21: Raw 74% | Weight 1x [NORMAL]
+     - Judge 25: Raw 74% | Weight 1x [NORMAL]
+
+📌 Project: "ReadEasy - Dyslexia-Friendly Reader" (Team ReadEasyTeam)
+   Track: Education & EdTech
+   • Simple Unweighted Average:   75.67%  (Rank #26)
+   • VERA Calibrated Score:        75.67%  (Rank #26) [Calibration Shift: 0%]
+   • Hard Exclusion Score:         75.67%  (Rank #27)
+   ℹ️ STABLE POSITION: Rank #26 across unweighted and calibrated models
+   Judge Evaluation Breakdown:
+     - Judge 07: Raw 74% | Weight 1x [NORMAL]
+     - Judge 11: Raw 74% | Weight 1x [NORMAL]
+     - Judge 15: Raw 80% | Weight 1x [NORMAL]
+     - Judge 19: Raw 80% | Weight 1x [NORMAL]
+     - Judge 23: Raw 72% | Weight 1x [NORMAL]
+     - Judge 27: Raw 74% | Weight 1x [NORMAL]
+
+📌 Project: "ProofID - Zero-Knowledge Identity Protocol" (Team ProofIDTeam)
+   Track: Web3 & Decentralized
+   • Simple Unweighted Average:   75.67%  (Rank #27)
+   • VERA Calibrated Score:        75.67%  (Rank #27) [Calibration Shift: 0%]
+   • Hard Exclusion Score:         75.67%  (Rank #28)
+   ℹ️ STABLE POSITION: Rank #27 across unweighted and calibrated models
+   Judge Evaluation Breakdown:
+     - Judge 06: Raw 74% | Weight 1x [NORMAL]
+     - Judge 10: Raw 80% | Weight 1x [NORMAL]
+     - Judge 14: Raw 80% | Weight 1x [NORMAL]
+     - Judge 18: Raw 72% | Weight 1x [NORMAL]
+     - Judge 22: Raw 74% | Weight 1x [NORMAL]
+     - Judge 26: Raw 74% | Weight 1x [NORMAL]
+
+📌 Project: "OncoTrack - Tumor Biomarker Analysis" (Team OncoTrackTeam)
+   Track: Healthcare & Biotech
+   • Simple Unweighted Average:   75.67%  (Rank #28)
+   • VERA Calibrated Score:        75.67%  (Rank #28) [Calibration Shift: 0%]
+   • Hard Exclusion Score:         75.67%  (Rank #29)
+   ℹ️ STABLE POSITION: Rank #28 across unweighted and calibrated models
+   Judge Evaluation Breakdown:
+     - Judge 05: Raw 74% | Weight 1x [NORMAL]
+     - Judge 09: Raw 74% | Weight 1x [NORMAL]
+     - Judge 13: Raw 80% | Weight 1x [NORMAL]
+     - Judge 17: Raw 80% | Weight 1x [NORMAL]
+     - Judge 21: Raw 72% | Weight 1x [NORMAL]
+     - Judge 25: Raw 74% | Weight 1x [NORMAL]
+
+📌 Project: "SynthVoice - Realtime Audio Cloning" (Team SynthVoiceTeam)
+   Track: AI & Machine Learning
+   • Simple Unweighted Average:   75.43%  (Rank #29)
+   • VERA Calibrated Score:        75.43%  (Rank #29) [Calibration Shift: 0%]
+   • Hard Exclusion Score:         75.43%  (Rank #30)
+   ℹ️ STABLE POSITION: Rank #29 across unweighted and calibrated models
+   Judge Evaluation Breakdown:
+     - Judge 04: Raw 74% | Weight 1x [NORMAL]
+     - Judge 08: Raw 74% | Weight 1x [NORMAL]
+     - Judge 12: Raw 80% | Weight 1x [NORMAL]
+     - Judge 16: Raw 80% | Weight 1x [NORMAL]
+     - Judge 20: Raw 72% | Weight 1x [NORMAL]
+     - Judge 24: Raw 74% | Weight 1x [NORMAL]
+     - Judge 28: Raw 74% | Weight 1x [NORMAL]
+
+📌 Project: "TaxCalc - Automated Crypto Tax Engine" (Team TaxCalcTeam)
+   Track: Fintech & Open Finance
+   • Simple Unweighted Average:   75.43%  (Rank #30)
+   • VERA Calibrated Score:        75.43%  (Rank #30) [Calibration Shift: 0%]
+   • Hard Exclusion Score:         75.43%  (Rank #31)
+   ℹ️ STABLE POSITION: Rank #30 across unweighted and calibrated models
+   Judge Evaluation Breakdown:
+     - Judge 04: Raw 74% | Weight 1x [NORMAL]
+     - Judge 08: Raw 74% | Weight 1x [NORMAL]
+     - Judge 12: Raw 80% | Weight 1x [NORMAL]
+     - Judge 16: Raw 80% | Weight 1x [NORMAL]
+     - Judge 20: Raw 72% | Weight 1x [NORMAL]
+     - Judge 24: Raw 74% | Weight 1x [NORMAL]
+     - Judge 28: Raw 74% | Weight 1x [NORMAL]
+
+📌 Project: "BioMesh - Decentralized Genomic Sequence Index" (Team BioMesh)
+   Track: Healthcare & Biotech
+   • Simple Unweighted Average:   75.33%  (Rank #31)
+   • VERA Calibrated Score:        75.33%  (Rank #31) [Calibration Shift: 0%]
+   • Hard Exclusion Score:         75.33%  (Rank #32)
+   ℹ️ STABLE POSITION: Rank #31 across unweighted and calibrated models
+   Judge Evaluation Breakdown:
+     - Judge 05: Raw 72% | Weight 1x [NORMAL]
+     - Judge 09: Raw 74% | Weight 1x [NORMAL]
+     - Judge 13: Raw 74% | Weight 1x [NORMAL]
+     - Judge 17: Raw 80% | Weight 1x [NORMAL]
+     - Judge 21: Raw 80% | Weight 1x [NORMAL]
+     - Judge 25: Raw 72% | Weight 1x [NORMAL]
+
+📌 Project: "ChainGuard - Smart Contract Auditor" (Team ChainGuardTeam)
+   Track: Web3 & Decentralized
+   • Simple Unweighted Average:   75.33%  (Rank #32)
+   • VERA Calibrated Score:        75.33%  (Rank #32) [Calibration Shift: 0%]
+   • Hard Exclusion Score:         75.33%  (Rank #33)
+   ℹ️ STABLE POSITION: Rank #32 across unweighted and calibrated models
+   Judge Evaluation Breakdown:
+     - Judge 06: Raw 72% | Weight 1x [NORMAL]
+     - Judge 10: Raw 74% | Weight 1x [NORMAL]
+     - Judge 14: Raw 74% | Weight 1x [NORMAL]
+     - Judge 18: Raw 80% | Weight 1x [NORMAL]
+     - Judge 22: Raw 80% | Weight 1x [NORMAL]
+     - Judge 26: Raw 72% | Weight 1x [NORMAL]
+
+📌 Project: "CleanOcean - Satellite Trash Tracking" (Team CleanOceanTeam)
+   Track: Social Impact
+   • Simple Unweighted Average:   75.33%  (Rank #33)
+   • VERA Calibrated Score:        75.33%  (Rank #33) [Calibration Shift: 0%]
+   • Hard Exclusion Score:         75.33%  (Rank #34)
+   ℹ️ STABLE POSITION: Rank #33 across unweighted and calibrated models
+   Judge Evaluation Breakdown:
+     - Judge 07: Raw 72% | Weight 1x [NORMAL]
+     - Judge 11: Raw 74% | Weight 1x [NORMAL]
+     - Judge 15: Raw 74% | Weight 1x [NORMAL]
+     - Judge 19: Raw 80% | Weight 1x [NORMAL]
+     - Judge 23: Raw 80% | Weight 1x [NORMAL]
+     - Judge 27: Raw 72% | Weight 1x [NORMAL]
+
+📌 Project: "DevMetrics - Engineering Velocity Dashboard" (Team DevMetricsTeam)
+   Track: Developer Tools
+   • Simple Unweighted Average:   75.33%  (Rank #34)
+   • VERA Calibrated Score:        75.33%  (Rank #34) [Calibration Shift: 0%]
+   • Hard Exclusion Score:         75.33%  (Rank #35)
+   ℹ️ STABLE POSITION: Rank #34 across unweighted and calibrated models
+   Judge Evaluation Breakdown:
+     - Judge 05: Raw 72% | Weight 1x [NORMAL]
+     - Judge 09: Raw 74% | Weight 1x [NORMAL]
+     - Judge 13: Raw 74% | Weight 1x [NORMAL]
+     - Judge 17: Raw 80% | Weight 1x [NORMAL]
+     - Judge 21: Raw 80% | Weight 1x [NORMAL]
+     - Judge 25: Raw 72% | Weight 1x [NORMAL]
+
+📌 Project: "ByteShield - Memory Safety Linter" (Team ByteShieldTeam)
+   Track: Systems & Infrastructure
+   • Simple Unweighted Average:   75.33%  (Rank #35)
+   • VERA Calibrated Score:        75.33%  (Rank #35) [Calibration Shift: 0%]
+   • Hard Exclusion Score:         75.33%  (Rank #36)
+   ℹ️ STABLE POSITION: Rank #35 across unweighted and calibrated models
+   Judge Evaluation Breakdown:
+     - Judge 06: Raw 72% | Weight 1x [NORMAL]
+     - Judge 10: Raw 74% | Weight 1x [NORMAL]
+     - Judge 14: Raw 74% | Weight 1x [NORMAL]
+     - Judge 18: Raw 80% | Weight 1x [NORMAL]
+     - Judge 22: Raw 80% | Weight 1x [NORMAL]
+     - Judge 26: Raw 72% | Weight 1x [NORMAL]
+
+📌 Project: "QuizCraft - AI Flashcard Generator" (Team QuizCraftTeam)
+   Track: Education & EdTech
+   • Simple Unweighted Average:   75.33%  (Rank #36)
+   • VERA Calibrated Score:        75.33%  (Rank #36) [Calibration Shift: 0%]
+   • Hard Exclusion Score:         75.33%  (Rank #37)
+   ℹ️ STABLE POSITION: Rank #36 across unweighted and calibrated models
+   Judge Evaluation Breakdown:
+     - Judge 07: Raw 72% | Weight 1x [NORMAL]
+     - Judge 11: Raw 74% | Weight 1x [NORMAL]
+     - Judge 15: Raw 74% | Weight 1x [NORMAL]
+     - Judge 19: Raw 80% | Weight 1x [NORMAL]
+     - Judge 23: Raw 80% | Weight 1x [NORMAL]
+     - Judge 27: Raw 72% | Weight 1x [NORMAL]
+
+📌 Project: "VisionDoc - OCR Document Processor" (Team VisionDocTeam)
+   Track: AI & Machine Learning
+   • Simple Unweighted Average:   75.14%  (Rank #37)
+   • VERA Calibrated Score:        75.14%  (Rank #37) [Calibration Shift: 0%]
+   • Hard Exclusion Score:         75.14%  (Rank #38)
+   ℹ️ STABLE POSITION: Rank #37 across unweighted and calibrated models
+   Judge Evaluation Breakdown:
+     - Judge 04: Raw 72% | Weight 1x [NORMAL]
+     - Judge 08: Raw 74% | Weight 1x [NORMAL]
+     - Judge 12: Raw 74% | Weight 1x [NORMAL]
+     - Judge 16: Raw 80% | Weight 1x [NORMAL]
+     - Judge 20: Raw 80% | Weight 1x [NORMAL]
+     - Judge 24: Raw 72% | Weight 1x [NORMAL]
+     - Judge 28: Raw 74% | Weight 1x [NORMAL]
+
+📌 Project: "MicroLend - Microfinance Credit Scoring" (Team MicroLendTeam)
+   Track: Fintech & Open Finance
+   • Simple Unweighted Average:   75.14%  (Rank #38)
+   • VERA Calibrated Score:        75.14%  (Rank #38) [Calibration Shift: 0%]
+   • Hard Exclusion Score:         75.14%  (Rank #39)
+   ℹ️ STABLE POSITION: Rank #38 across unweighted and calibrated models
+   Judge Evaluation Breakdown:
+     - Judge 04: Raw 72% | Weight 1x [NORMAL]
+     - Judge 08: Raw 74% | Weight 1x [NORMAL]
+     - Judge 12: Raw 74% | Weight 1x [NORMAL]
+     - Judge 16: Raw 80% | Weight 1x [NORMAL]
+     - Judge 20: Raw 80% | Weight 1x [NORMAL]
+     - Judge 24: Raw 72% | Weight 1x [NORMAL]
+     - Judge 28: Raw 74% | Weight 1x [NORMAL]
+
+📌 Project: "PulseTrace - Real-Time Microsecond Distributed Tracing" (Team CodePulse)
+   Track: Developer Tools
+   • Simple Unweighted Average:   71.78%  (Rank #39)
+   • VERA Calibrated Score:        72.58%  (Rank #39) [Calibration Shift: +0.8%]
+   • Hard Exclusion Score:         78.00%  (Rank #1)
+   ℹ️ STABLE POSITION: Rank #39 across unweighted and calibrated models
+   Judge Evaluation Breakdown:
+     - Dr. Sarah Chen (Senior AI Researcher): Raw 86% | Weight 1x [NORMAL]
+     - Marcus Vance (Systems Architect - Planted Bad Judge): Raw 80% | Weight 0.56x [FLAGS: LOW_VARIANCE, FATIGUE]
+     - Elena Rostova (VC Technical Partner): Raw 20% | Weight 0.8x [FLAGS: FATIGUE]
+     - Judge 05: Raw 80% | Weight 1x [NORMAL]
+     - Judge 09: Raw 80% | Weight 1x [NORMAL]
+     - Judge 13: Raw 72% | Weight 1x [NORMAL]
+     - Judge 17: Raw 74% | Weight 1x [NORMAL]
+     - Judge 21: Raw 74% | Weight 1x [NORMAL]
+     - Judge 25: Raw 80% | Weight 1x [NORMAL]
+
+📌 Project: "EcoGraph - Auditable Carbon Footprint Accounting" (Team EcoGraph)
+   Track: Social Impact
+   • Simple Unweighted Average:   71.56%  (Rank #40)
+   • VERA Calibrated Score:        71.63%  (Rank #40) [Calibration Shift: +0.07%]
+   • Hard Exclusion Score:         73.43%  (Rank #40)
+   ℹ️ STABLE POSITION: Rank #40 across unweighted and calibrated models
+   Judge Evaluation Breakdown:
+     - Dr. Sarah Chen (Senior AI Researcher): Raw 60% | Weight 1x [NORMAL]
+     - Marcus Vance (Systems Architect - Planted Bad Judge): Raw 80% | Weight 0.56x [FLAGS: LOW_VARIANCE, FATIGUE]
+     - Elena Rostova (VC Technical Partner): Raw 50% | Weight 0.8x [FLAGS: FATIGUE]
+     - Judge 07: Raw 74% | Weight 1x [NORMAL]
+     - Judge 11: Raw 80% | Weight 1x [NORMAL]
+     - Judge 15: Raw 80% | Weight 1x [NORMAL]
+     - Judge 19: Raw 72% | Weight 1x [NORMAL]
+     - Judge 23: Raw 74% | Weight 1x [NORMAL]
+     - Judge 27: Raw 74% | Weight 1x [NORMAL]
+
+================================================================================
+         METHODOLOGY COMPARISON: UNWEIGHTED vs HARD EXCLUSION vs WEIGHTED       
+================================================================================
+
+Submissions Ranking Table Across All 3 Evaluation Methods:
+
+Project Name                | Simple Unweighted  | Hard Exclusion     | VERA Calibrated (Soft)
+----------------------------+--------------------+--------------------+-----------------------
+Aether Engine - Local Neura | 77.45% (#1)        | 76.06% (#16)       | 77.15% (#1)          
+PayStream - Micro-payroll E | 77.14% (#2)        | 77.14% (#2)        | 77.14% (#2)          
+AgentFlow - Autonomous Work | 77.14% (#3)        | 77.14% (#3)        | 77.14% (#3)          
+ZeroYield - Automated DeFi  | 76.67% (#4)        | 76.67% (#4)        | 76.67% (#4)          
+OpenClass - Interactive Pee | 76.67% (#5)        | 76.67% (#5)        | 76.67% (#5)          
+MedFlow - Emergency Room Tr | 76.67% (#6)        | 76.67% (#6)        | 76.67% (#6)          
+CodeMentor - AI Tutor for C | 76.67% (#7)        | 76.67% (#7)        | 76.67% (#7)          
+L2Bridge - Trustless Rollup | 76.67% (#8)        | 76.67% (#8)        | 76.67% (#8)          
+GeneScan - Variant Effect P | 76.67% (#9)        | 76.67% (#9)        | 76.67% (#9)          
+AgriSense - Crop Yield Sens | 76.67% (#10)       | 76.67% (#10)       | 76.67% (#10)         
+Starlight - Decentralized S | 76.67% (#11)       | 76.67% (#11)       | 76.67% (#11)         
+MockAPI - Instant REST & Gr | 76.67% (#12)       | 76.67% (#12)       | 76.67% (#12)         
+SolarShare - P2P Solar Ener | 76.67% (#13)       | 76.67% (#13)       | 76.67% (#13)         
+Aether Engine - Local Neura | 76.67% (#14)       | 76.67% (#14)       | 76.67% (#14)         
+LedgerSync - Cross-Border P | 76.29% (#15)       | 76.29% (#15)       | 76.29% (#15)         
+QuantumVault - Post-Quantum | 76.00% (#16)       | 76.00% (#17)       | 76.00% (#16)         
+ModelCompress - LLM Quantiz | 76.00% (#17)       | 76.00% (#18)       | 76.00% (#17)         
+Quiet Hours - Focus Shield  | 75.67% (#18)       | 75.67% (#19)       | 75.67% (#18)         
+HyperLog - Fast Log Aggrega | 75.67% (#19)       | 75.67% (#20)       | 75.67% (#19)         
+GridPulse - Smart Grid Load | 75.67% (#20)       | 75.67% (#21)       | 75.67% (#20)         
+VaporDB - Embedded In-Memor | 75.67% (#21)       | 75.67% (#22)       | 75.67% (#21)         
+TraceNet - eBPF Network Vis | 75.67% (#22)       | 75.67% (#23)       | 75.67% (#22)         
+LabSim - Virtual Chemistry  | 75.67% (#23)       | 75.67% (#24)       | 75.67% (#23)         
+KernelRider - Custom Linux  | 75.67% (#24)       | 75.67% (#25)       | 75.67% (#24)         
+HeartBeat - Remote Patient  | 75.67% (#25)       | 75.67% (#26)       | 75.67% (#25)         
+ReadEasy - Dyslexia-Friendl | 75.67% (#26)       | 75.67% (#27)       | 75.67% (#26)         
+ProofID - Zero-Knowledge Id | 75.67% (#27)       | 75.67% (#28)       | 75.67% (#27)         
+OncoTrack - Tumor Biomarker | 75.67% (#28)       | 75.67% (#29)       | 75.67% (#28)         
+SynthVoice - Realtime Audio | 75.43% (#29)       | 75.43% (#30)       | 75.43% (#29)         
+TaxCalc - Automated Crypto  | 75.43% (#30)       | 75.43% (#31)       | 75.43% (#30)         
+BioMesh - Decentralized Gen | 75.33% (#31)       | 75.33% (#32)       | 75.33% (#31)         
+ChainGuard - Smart Contract | 75.33% (#32)       | 75.33% (#33)       | 75.33% (#32)         
+CleanOcean - Satellite Tras | 75.33% (#33)       | 75.33% (#34)       | 75.33% (#33)         
+DevMetrics - Engineering Ve | 75.33% (#34)       | 75.33% (#35)       | 75.33% (#34)         
+ByteShield - Memory Safety  | 75.33% (#35)       | 75.33% (#36)       | 75.33% (#35)         
+QuizCraft - AI Flashcard Ge | 75.33% (#36)       | 75.33% (#37)       | 75.33% (#36)         
+VisionDoc - OCR Document Pr | 75.14% (#37)       | 75.14% (#38)       | 75.14% (#37)         
+MicroLend - Microfinance Cr | 75.14% (#38)       | 75.14% (#39)       | 75.14% (#38)         
+PulseTrace - Real-Time Micr | 71.78% (#39)       | 78.00% (#1)        | 72.58% (#39)         
+EcoGraph - Auditable Carbon | 71.56% (#40)       | 73.43% (#40)       | 71.63% (#40)         
+
+--------------------------------------------------------------------------------
+💡 WHY VERA USES SOFT CONFIDENCE WEIGHTING INSTEAD OF HARD EXCLUSION:
+--------------------------------------------------------------------------------
+1. HARD EXCLUSION DISCARDS VALUABLE SIGNAL:
+   Excluding flagged judges entirely (e.g. Marcus Vance or Elena Rostova) discarded
+   66% of the judging data for this event. Even a judge who experienced late fatigue
+   or exhibited low variance still provides valid ordinal feedback.
+
+2. HARD EXCLUSION CREATES FRAGILE SINGLE-JUDGE RANKINGS:
+   In hard exclusion, Aether Engine leaps to Rank #1 purely because 1 judge remains.
+   Soft confidence weighting dampens anomalous scores (down to 0.56x and 0.8x)
+   while preserving judge consensus, leading to robust, verifiable rank outcomes.
+================================================================================
+

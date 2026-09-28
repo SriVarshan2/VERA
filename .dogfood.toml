@@ -1,0 +1,19 @@
+[portal]
+base_url = "http://localhost:3000"
+
+[tiers]
+claimed = ["T1", "T2"]
+pitch = "VERA: Verifiable Evaluation & Ranking Assistant"
+
+[auth]
+organizer   = "Cookie: next-auth.session-token=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..3D8TK3iCvkcBga-0.5wremS7zqo6lHYmJG41kTjDU29JoErd6v5js1sW16xjpMMJp0H3VxfPybXg1_xBE5e-K1ymo2cXIY7zUK-dTxHtQ3YWucoWUXUEKPkECgH9BeDg9jwX78wPv_5NUWlfEF3fvtbEq1NnpTzCIiXZm36-Q-Vi6u-mRENPJ0E1kR1OsKYcY5qL1hXt8p17l4_YZQCjMaEicc-0Anpz7_niENrwJYScD_HAwnPdbymmhmpiO9BOUx77c.M9fd7fe0R41Hs-rsPtvk8Q"
+judge_a     = "Cookie: next-auth.session-token=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..SFLhRtDmhWcmrYJu.bbVhxS78L7e0Zntfq8TpvO_4kjhxA08epiTEkvCiU5GMRN3TMj2YhzpJ8KixjIl4YMywYlqpmIpBnQIUgiJdFvmYEeH1giNQ_d2TBCqaGdK1RES8IJl3aL-sO5qUAxhBvm9DzI9IYuikqSjKoFiBXx-1OvdOidH6j6w-IP75VooQD5hRThx_eUM-5_sjdpV7XAh8d3dQVwQdeCmi4GnYSXV3lQaTjOjLFoMCpxa0AqwYRxt8xf9f76uEHC-rMjl8Pu0j2AH1bd6utdQf6Gxs.CzLOwzcUP2I6IjsOd09fuA"
+judge_b     = "Cookie: next-auth.session-token=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..KIeOe96Qdf8mHTh6.y1efxmC9LZYq8LY-N12YoIL7Em3LwxmbEJhYOWYSwZ-EemOGgW_0XMNb9SGsseq-rt3sPcdZUMKYOYI5pVnGnZL-x1Lb3nJOgbDVq0HeKaPg6eoS7Fh6Yk4qV6kiA_a7_nJg4bGfglRAaxsIttAfkGNbhUoxK5Nf2wH5-8Xp9TOaslOyWpL4uAoD5MRCczNpWfYkXADomYrZxn_4BkhVYgo9bWXjCdJ1zeHYPGaIXfiLrX8q_ZRMpvMBbPD9l42RNU--jW3yHh94dhHN3myo04WqxFMCHWEmvi_tW7unLQ.5_-aDku7vTGc3sO3Gm3nRA"
+participant = "Cookie: next-auth.session-token=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..ri3i0wsxb6CYY9qS.zgrWfb6BiWksk_wFISHEwFdr3LvwmSK4H90rCG3k8CFEgjHIuTJz1pLSPF8lwwMgCZmh4g1VLGWHFR-G4R9FCZnZ-dgbitPfNo6091I0ZsAxpzDU6TrsjcDHBBJo6_44c6GZbjR1nGEoqxqpe5VxIjPt5nmDxwqywyqS4ZCkbLSJFIHzjEur2-p8OFkRWfSyL-V6eOZxln648KfoW76WkcxU_Ftl2UkEtGe5kU6JGzLm9E-iieQrKzE.D4IFFvSR2a5dir-fMCcJsg"
+
+[routes]
+gallery      = "/api/submissions"
+submit       = "/api/submissions"
+judge_scores = "/api/judge/scores"
+peer_scores  = "/api/judge/scores?judgeId=cmul7oze20002131oxizpl6hn"
+csv_export   = "/api/organizer/export?type=scores"

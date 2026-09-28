@@ -1,0 +1,166 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  role         String   // "visitor" | "participant" | "judge" | "organizer" | "admin"
+  name         String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  organizedEvents  Event[]           @relation("EventOrganizer")
+  teamMemberships  TeamMember[]
+  judgeAssignments JudgeAssignment[]
+  scores           Score[]
+  scoreEvents      ScoreEvent[]
+}
+
+model Event {
+  id              String   @id @default(cuid())
+  name            String
+  description     String
+  startDate       DateTime
+  endDate         DateTime
+  tracks          String   // JSON array of track names e.g. '["AI/ML", "Web3", "Developer Tools", "Social Impact"]'
+  organizerId     String
+  resultsRevealed Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  organizer        User              @relation("EventOrganizer", fields: [organizerId], references: [id])
+  teams            Team[]
+  submissions      Submission[]
+  judgeAssignments JudgeAssignment[]
+  rubricCriteria   RubricCriterion[]
+  publicVotes      PublicVote[]
+}
+
+model Team {
+  id         String   @id @default(cuid())
+  eventId    String
+  name       String
+  inviteCode String   @unique
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  event      Event        @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  members    TeamMember[]
+  submission Submission?
+}
+
+model TeamMember {
+  id        String   @id @default(cuid())
+  userId    String
+  teamId    String
+  role      String   @default("member") // "leader" | "member"
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  team Team @relation(fields: [teamId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, teamId])
+}
+
+model Submission {
+  id            String   @id @default(cuid())
+  teamId        String   @unique
+  eventId       String
+  name          String
+  tagline       String
+  description   String
+  repoUrl       String
+  demoUrl       String
+  imageUrls     String   // JSON array string e.g. '["https://..."]'
+  techTags      String   // JSON array string e.g. '["Next.js", "TypeScript"]'
+  track         String
+  customAnswers String   // JSON object string
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  isLocked      Boolean  @default(false)
+
+  team             Team              @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  event            Event             @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  judgeAssignments JudgeAssignment[]
+  scores           Score[]
+  scoreEvents      ScoreEvent[]
+  publicVotes      PublicVote[]
+}
+
+model JudgeAssignment {
+  id           String   @id @default(cuid())
+  judgeId      String
+  submissionId String
+  eventId      String
+  status       String   @default("pending") // "pending" | "completed"
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  judge      User       @relation(fields: [judgeId], references: [id], onDelete: Cascade)
+  submission Submission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+  event      Event      @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@unique([judgeId, submissionId])
+}
+
+model RubricCriterion {
+  id        String   @id @default(cuid())
+  eventId   String
+  name      String
+  weight    Float    // Weight percentage e.g. 30.0 for 30%
+  maxScore  Float    @default(5.0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  event  Event   @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  scores Score[]
+}
+
+model Score {
+  id           String   @id @default(cuid())
+  judgeId      String
+  submissionId String
+  criterionId  String
+  value        Float    // Score value (1.0 to 5.0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  judge       User            @relation(fields: [judgeId], references: [id], onDelete: Cascade)
+  submission  Submission      @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+  criterion   RubricCriterion @relation(fields: [criterionId], references: [id], onDelete: Cascade)
+
+  @@unique([judgeId, submissionId, criterionId])
+}
+
+model ScoreEvent {
+  id           String   @id @default(cuid())
+  type         String   // "SCORE_SUBMITTED" | "SCORE_UPDATED" | "NORMALIZATION_APPLIED" | "JUDGE_FLAGGED_LOW_VARIANCE" | "JUDGE_FLAGGED_FATIGUE"
+  payload      String   // JSON string containing event details
+  submissionId String?
+  judgeId      String?
+  createdAt    DateTime @default(now())
+
+  submission Submission? @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+  judge      User?       @relation(fields: [judgeId], references: [id], onDelete: Cascade)
+}
+
+model PublicVote {
+  id           String   @id @default(cuid())
+  eventId      String
+  submissionId String
+  voterToken   String
+  ipAddress    String?
+  createdAt    DateTime @default(now())
+
+  event      Event      @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  submission Submission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+
+  @@unique([submissionId, voterToken])
+}

@@ -1,0 +1,1706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DOGFOOD spec · the four files you build against</title>
+<meta name="description" content="The DOGFOOD 2026 spec. Four files, seven checks, and everything you need to copy.">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../img/favicon-180.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:wght@400;500;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Archivo:wght@400;600&family=Anton&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=Bebas+Neue&family=Syne:wght@600;800&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../css/styles.css?v=202609141617">
+<style>
+/* ---- spec page only ---------------------------------------------- */
+a{color:#FF3D6E;text-decoration:none}
+a:hover{color:#E6ECFF}
+.sp-nav a:hover{color:#E6ECFF!important}
+.sp-cta:hover{background:#0B1020!important;color:#FF3D6E!important}
+.sp-cta:active{transform:translateY(1px) scale(.98)}
+
+/* copy blocks */
+.cbox{border:1px solid #1B2540;background:#0E1428;margin:0 0 22px}
+.cbar{display:flex;align-items:center;justify-content:space-between;gap:12px;
+      padding:9px 12px;border-bottom:1px solid #1B2540;
+      font:400 9.5px/1 'Space Mono',monospace;letter-spacing:.2em;
+      text-transform:uppercase;color:#55658C}
+.cbar .fn{font-family:'Anton',sans-serif;font-size:12px;letter-spacing:.16em;color:#E6ECFF}
+.cbtn{flex:none;cursor:pointer;background:#0B1020;color:#FF3D6E;
+      border:1px solid #FF3D6E;font:700 10px/1 'JetBrains Mono',monospace;
+      letter-spacing:.18em;text-transform:uppercase;padding:8px 12px;
+      transition:background .12s linear,color .12s linear,transform .08s linear}
+.cbtn:hover{background:#FF3D6E;color:#0B1020}
+.cbtn:active{transform:translateY(1px) scale(.98)}
+.cbtn.ok{background:#00E5D0;border-color:#00E5D0;color:#0B1020}
+.ccode{margin:0;padding:clamp(14px,1.4vw,20px) clamp(12px,1.4vw,18px);
+       overflow-x:auto;font-family:'JetBrains Mono',monospace;
+       font-size:clamp(11px,1vw,12.5px);line-height:1.75;color:#AEBAD6;
+       white-space:pre;tab-size:2}
+.ccode .k{color:#FF3D6E}
+.ccode .c{color:#4A5A80}
+.ccode .g{color:#00E5D0}
+
+/* section label idiom */
+.slab{display:flex;align-items:baseline;gap:14px;margin-bottom:26px}
+.slab .num{user-select:none;font-family:'Archivo Black',sans-serif;
+      font-size:clamp(2rem,5vw,4rem);line-height:.72;letter-spacing:-.05em;
+      color:transparent;-webkit-text-stroke:1px #26355C;flex:none}
+.slab .txt{font:400 17px/1 'Bebas Neue',sans-serif;letter-spacing:.22em;color:#00E5D0}
+.slab .rl{flex:1;height:1px;background:#00E5D0;display:block}
+
+h2.sh{margin:0 0 18px;max-width:22ch;font-family:'Archivo Black',sans-serif;
+      font-size:clamp(1.7rem,4.6vw,3.4rem);line-height:.94;letter-spacing:-.04em;
+      text-transform:uppercase;color:#E6ECFF}
+p.sb{margin:0 0 20px;max-width:68ch;font:400 13px/1.85 'JetBrains Mono',monospace;color:#AEBAD6}
+p.sb strong{color:#E6ECFF}
+.mini{font:500 11px/1 'IBM Plex Mono',monospace;letter-spacing:.24em;
+      text-transform:uppercase;color:#FF3D6E;margin-bottom:14px}
+
+figure.fg{margin:0 0 28px;border:1px solid #1B2540;background:#0E1428}
+figure.fg figcaption{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;
+      padding:11px 14px;border-bottom:1px solid #1B2540;
+      font:400 9.5px/1 'Space Mono',monospace;letter-spacing:.2em;
+      text-transform:uppercase;color:#55658C}
+figure.fg figcaption .t{font-family:'Anton',sans-serif;font-size:12px;letter-spacing:.16em;color:#E6ECFF}
+figure.fg figcaption{align-items:center}
+figure.fg figcaption .cbtn{margin:-4px 0}
+figure.fg svg{display:block;width:100%;height:auto;background:#0E1428}
+
+.chk{border:1px solid #1B2540;background:#0B1020;padding:18px 20px;margin:0 0 1px}
+.chk .cn{font:700 12px/1.5 'JetBrains Mono',monospace;color:#E6ECFF;margin:0 0 8px}
+.chk .cr{font:400 11.5px/1.8 'Space Mono',monospace;color:#6B7A9E;white-space:pre-wrap;margin:0}
+.chk .cr b{color:#00E5D0;font-weight:400}
+
+.warn{padding:18px 20px;border:1px solid #FF3D6E;background:#121A32;
+      font:400 13px/1.8 'JetBrains Mono',monospace;color:#E6ECFF;margin:0 0 22px}
+.warn b{color:#FF3D6E}
+
+ul.pl{margin:0 0 20px;padding:0;list-style:none}
+ul.pl li{position:relative;padding:0 0 10px 20px;max-width:68ch;
+      font:400 12.5px/1.8 'JetBrains Mono',monospace;color:#AEBAD6}
+ul.pl li:before{content:"+";position:absolute;left:0;color:#00E5D0}
+ul.pl.no li:before{content:"\2717";color:#3A4A70}
+
+.sec{padding:clamp(48px,6.5vw,92px) clamp(12px,2vw,24px);border-top:1px solid #1B2540;scroll-margin-top:80px}
+.sec.alt{background:#0E1428}
+.sec.teal{border-top:1px solid #00E5D0}
+.wrap{max-width:1180px;margin:0 auto}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));
+      gap:clamp(20px,3vw,48px);align-items:start}
+
+/* the big context button */
+#ctxpanel{border:2px solid #FF3D6E;background:#121A32;
+      padding:clamp(16px,2.2vw,24px);margin:0 0 24px;max-width:780px}
+.ctxhead{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;
+      gap:8px 18px;margin:0 0 10px}
+.ctxmeta{font:400 10px/1 'Space Mono',monospace;letter-spacing:.18em;
+      text-transform:uppercase;color:#6B7A9E;white-space:nowrap}
+.ctxmeta b{color:#E6ECFF;font-weight:400}
+.ctxlede{margin:0 0 16px;max-width:58ch;
+      font:400 13px/1.7 'JetBrains Mono',monospace;color:#E6ECFF}
+#ctxbtn{display:flex;align-items:center;justify-content:space-between;gap:16px;
+      width:100%;cursor:pointer;background:#FF3D6E;color:#0B1020;
+      border:2px solid #FF3D6E;padding:clamp(18px,2.6vw,26px) clamp(16px,2.2vw,26px);
+      font-family:'Archivo Black',sans-serif;
+      font-size:clamp(1.15rem,3.4vw,2.1rem);line-height:1;letter-spacing:-.02em;
+      text-transform:uppercase;text-align:left;
+      transition:background .12s linear,color .12s linear,transform .08s linear}
+#ctxbtn:hover{background:#0B1020;color:#FF3D6E}
+#ctxbtn:active{transform:translateY(2px)}
+#ctxbtn.ok{background:#00E5D0;border-color:#00E5D0;color:#0B1020}
+#ctxbtn .arw{font-family:'JetBrains Mono',monospace;font-size:clamp(.9rem,2vw,1.3rem);flex:none}
+.ctxq{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));
+      gap:1px;background:#1B2540;border:1px solid #1B2540;border-top:0}
+.ctxq span{background:#0B1020;padding:11px 13px;
+      font:400 11px/1.55 'JetBrains Mono',monospace;color:#6B7A9E}
+.ctxq span:before{content:"> ";color:#00E5D0}
+
+/* nav drawer, standalone */
+.sp-nav{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
+      gap:6px 16px;padding:4px clamp(12px,2vw,24px);min-height:40px}
+.sp-links{display:flex;align-items:center;gap:clamp(10px,1.6vw,22px);
+      font:400 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase}
+.sp-burger{display:none;cursor:pointer;background:transparent;border:1px solid #1B2540;
+      width:38px;height:34px;padding:0}
+.sp-burger span{display:block;width:16px;height:1px;background:#E6ECFF;margin:3px auto}
+@media(max-width:860px){
+  .sp-burger{display:block}
+  .sp-links{position:fixed;top:0;right:0;bottom:0;z-index:82;width:min(80vw,300px);
+      flex-direction:column;align-items:flex-start;gap:18px;padding:70px 24px;
+      background:#0B1020;border-left:1px solid #00E5D0;transform:translateX(100%);
+      transition:transform .25s cubic-bezier(.16,1,.3,1)}
+  .sp-links.is-open{transform:none}
+  .sp-scrim{position:fixed;inset:0;z-index:81;background:rgba(11,16,32,.72);
+      opacity:0;pointer-events:none;transition:opacity .2s linear}
+  .sp-scrim.is-open{opacity:1;pointer-events:auto}
+}
+@media(min-width:861px){.sp-scrim{display:none}}
+html.nav-open,html.nav-open body{overflow:hidden}
+</style>
+</head>
+<body style="margin:0;background:#0B1020;color:#E6ECFF;font-family:'JetBrains Mono',ui-monospace,monospace;overflow-x:hidden">
+
+<!-- fixed overlays, decorative -->
+<div aria-hidden="true" style="position:fixed;inset:0;z-index:89;pointer-events:none;opacity:.15;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.55) 3px,rgba(0,0,0,.55) 4px)"></div>
+
+<header style="position:sticky;top:0;z-index:80;background:#0B1020;border-bottom:1px solid #00E5D0">
+  <div style="overflow:hidden;border-bottom:1px solid #16203A">
+    <div style="user-select:none;display:flex;width:max-content;animation:mq 34s linear infinite;will-change:transform">
+      <div style="display:flex;flex:none;font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:.18em;text-transform:uppercase;color:#FF3D6E;padding:6px 0">
+        <span style="padding:0 15px">Read this before the clock starts</span><span style="padding:0 15px">·</span><span style="padding:0 15px">Read this before the clock starts</span><span style="padding:0 15px">·</span><span style="padding:0 15px">Read this before the clock starts</span><span style="padding:0 15px">·</span><span style="padding:0 15px">Read this before the clock starts</span><span style="padding:0 15px">·</span>
+      </div>
+      <div aria-hidden="true" style="display:flex;flex:none;font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:.18em;text-transform:uppercase;color:#FF3D6E;padding:6px 0">
+        <span style="padding:0 15px">Read this before the clock starts</span><span style="padding:0 15px">·</span><span style="padding:0 15px">Read this before the clock starts</span><span style="padding:0 15px">·</span><span style="padding:0 15px">Read this before the clock starts</span><span style="padding:0 15px">·</span><span style="padding:0 15px">Read this before the clock starts</span><span style="padding:0 15px">·</span>
+      </div>
+    </div>
+  </div>
+  <nav class="sp-nav">
+    <div style="user-select:none;display:flex;align-items:center;gap:11px;font:700 11px/1 'JetBrains Mono',monospace;letter-spacing:.2em;color:#E6ECFF">
+      <a href="https://raptors.dev" target="_blank" rel="noopener" aria-label="Hackathon Raptors" style="display:block;flex:none;line-height:0"><img src="../img/raptors-icon.png" alt="Hackathon Raptors" draggable="false" style="display:block;height:19px;width:auto"></a>
+      <span style="width:1px;height:14px;background:#1B2540;flex:none"></span>
+      <a href="/" style="color:inherit;font:inherit;letter-spacing:inherit">DOGFOOD<span style="color:#4A5A80;font-weight:400">®</span></a>
+      <span style="color:#00E5D0;font-weight:400">/ SPEC</span>
+    </div>
+    <button class="sp-burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="sp-drawer"><span></span><span></span><span></span></button>
+    <div class="sp-scrim" aria-hidden="true"></div>
+    <div id="sp-drawer" class="sp-links">
+      <a href="#files" style="color:#6B7A9E">Four files</a>
+      <a href="#checks" style="color:#6B7A9E">The checks</a>
+      <a href="#ladder" style="color:#6B7A9E">Tiers</a>
+      <a href="#when" style="color:#6B7A9E">When</a>
+      <a href="#required" style="color:#6B7A9E">Required</a>
+      <a href="/#faq" style="color:#6B7A9E">FAQ</a>
+      <a class="sp-cta" href="https://discord.gg/xfYPDZYqeh" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;background:#FF3D6E;color:#0B1020;font-weight:700;letter-spacing:.16em;padding:7px 13px;border:1px solid #FF3D6E;transition:background .12s linear,color .12s linear">Ask in Discord <span>&gt;&gt;&gt;</span></a>
+    </div>
+  </nav>
+</header>
+
+<!-- ================= HERO ================= -->
+<section style="position:relative;padding:clamp(48px,7vw,96px) clamp(12px,2vw,24px) clamp(36px,5vw,64px);border-bottom:1px solid #1B2540">
+  <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(90deg,rgba(230,236,255,.045) 1px,transparent 1px),linear-gradient(0deg,rgba(230,236,255,.045) 1px,transparent 1px);background-size:calc(100%/12) 120px"></div>
+  <div class="wrap" style="position:relative">
+    <div class="mini">[ DOGFOOD 2026 · THE SPEC ]</div>
+    <h1 style="margin:0 0 20px;font-family:'Archivo Black',sans-serif;font-size:clamp(2.6rem,9vw,7rem);line-height:.88;letter-spacing:-.05em;text-transform:uppercase;color:#E6ECFF">Four files.<br>Seven checks.</h1>
+    <p style="margin:0 0 26px;max-width:60ch;font:400 14px/1.8 'JetBrains Mono',monospace;color:#AEBAD6">The website tells you what to build and how it is scored. This page is the small list of things your project has to agree on with ours, so a program can check your work.</p>
+    <p style="margin:0 0 26px;max-width:60ch;font:400 13px/1.8 'JetBrains Mono',monospace;color:#6B7A9E">Almost nothing here is a restriction. Most of it is a picture.</p>
+    <div id="ctxpanel">
+      <div class="ctxhead">
+        <div class="mini" style="margin:0;color:#00E5D0">[ NEW TO SPECS? START HERE ]</div>
+        <div class="ctxmeta"><b id="ctxwords">2,324</b> words · fits one message</div>
+      </div>
+      <p class="ctxlede">Copies this whole brief as plain text. Paste it into ChatGPT or Claude and ask anything.</p>
+      <button id="ctxbtn" type="button">
+        <span class="lbl">Copy everything</span>
+        <span class="arw">&gt;&gt;&gt;</span>
+      </button>
+      <div class="ctxq">
+        <span>"Explain this like I have never entered a hackathon"</span>
+        <span>"What can I legally do before Saturday?"</span>
+        <span>"What should a team of two build first?"</span>
+        <span>"Sketch me a database schema for T1"</span>
+        <span>"What does role isolation actually mean?"</span>
+        <span>"Write me a docker-compose for this"</span>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:12px">
+      <a class="sp-cta" href="spec.md" download style="display:inline-flex;align-items:center;gap:10px;background:#FF3D6E;color:#0B1020;font:700 11px/1 'JetBrains Mono',monospace;letter-spacing:.18em;text-transform:uppercase;padding:14px 20px;border:1px solid #FF3D6E;transition:background .12s linear,color .12s linear">[ Download spec.md ]</a>
+      <a class="sp-cta" href="run.py" download style="display:inline-flex;align-items:center;gap:10px;background:#0B1020;color:#FF3D6E;font:700 11px/1 'JetBrains Mono',monospace;letter-spacing:.18em;text-transform:uppercase;padding:14px 20px;border:1px solid #FF3D6E;transition:background .12s linear,color .12s linear">[ Download run.py ]</a>
+      <a class="sp-cta" href="fixtures.json" download style="display:inline-flex;align-items:center;gap:10px;background:#0B1020;color:#FF3D6E;font:700 11px/1 'JetBrains Mono',monospace;letter-spacing:.18em;text-transform:uppercase;padding:14px 20px;border:1px solid #FF3D6E;transition:background .12s linear,color .12s linear">[ Download fixtures.json ]</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 01 FOUR FILES ================= -->
+<section class="sec alt" id="files">
+ <div class="wrap">
+  <div class="slab"><span class="num">01</span><span class="txt">[ 01 / THE FOUR FILES ]</span><span class="rl"></span></div>
+  <h2 class="sh">How it all fits together</h2>
+  <p class="sb">You build a portal. We give you fake data to put in it and a small program that pokes it. The program writes a report. You commit the report. That is the entire mechanism.</p>
+
+  <figure class="fg">
+    <figcaption><span class="t">FIG. 01 · THE FOUR FILES</span><span style="color:#FF3D6E">TWO FROM US · TWO FROM YOU</span></figcaption>
+    <svg viewBox="0 0 900 300" role="img" aria-labelledby="fig1t fig1d" style="max-width:100%">
+      <title id="fig1t">How the four files connect</title>
+      <desc id="fig1d">fixtures.json is loaded into your portal. Your .dogfood.toml tells run.py where things are. run.py makes requests to your portal and writes acceptance-report.txt, which you commit.</desc>
+      <g font-family="'Space Mono',monospace" font-size="12">
+
+        <!-- from us: fixtures -->
+        <rect x="24" y="24" width="220" height="52" fill="#121A32" stroke="#00E5D0"/>
+        <text x="134" y="46" fill="#00E5D0" text-anchor="middle" font-size="11" letter-spacing="1.5">FROM US</text>
+        <text x="134" y="64" fill="#E6ECFF" text-anchor="middle" font-weight="700">fixtures.json</text>
+        <path d="M134 76 L134 128" stroke="#00E5D0" stroke-width="1.5"/>
+        <path d="M128 120 L134 130 L140 120" fill="none" stroke="#00E5D0" stroke-width="1.5"/>
+        <text x="146" y="106" fill="#6B7A9E" font-size="10">you load it</text>
+
+        <!-- your portal -->
+        <rect x="24" y="132" width="220" height="96" fill="#0B1020" stroke="#FF3D6E"/>
+        <text x="134" y="158" fill="#FF3D6E" text-anchor="middle" font-size="10" letter-spacing="1.5">FROM YOU</text>
+        <text x="134" y="182" fill="#E6ECFF" text-anchor="middle" font-size="14" font-weight="700">your portal</text>
+        <text x="134" y="204" fill="#6B7A9E" text-anchor="middle" font-size="10">docker compose up</text>
+        <text x="134" y="219" fill="#4A5A80" text-anchor="middle" font-size="10">any stack you like</text>
+
+        <!-- from you: toml -->
+        <rect x="340" y="24" width="220" height="52" fill="#121A32" stroke="#FF3D6E"/>
+        <text x="450" y="46" fill="#FF3D6E" text-anchor="middle" font-size="11" letter-spacing="1.5">FROM YOU</text>
+        <text x="450" y="64" fill="#E6ECFF" text-anchor="middle" font-weight="700">.dogfood.toml</text>
+        <path d="M450 76 L450 128" stroke="#FF3D6E" stroke-width="1.5"/>
+        <path d="M444 120 L450 130 L456 120" fill="none" stroke="#FF3D6E" stroke-width="1.5"/>
+        <text x="462" y="106" fill="#6B7A9E" font-size="10">where things are</text>
+
+        <!-- runner -->
+        <rect x="340" y="132" width="220" height="96" fill="#0B1020" stroke="#00E5D0"/>
+        <text x="450" y="158" fill="#00E5D0" text-anchor="middle" font-size="10" letter-spacing="1.5">FROM US</text>
+        <text x="450" y="182" fill="#E6ECFF" text-anchor="middle" font-size="14" font-weight="700">run.py</text>
+        <text x="450" y="204" fill="#6B7A9E" text-anchor="middle" font-size="10">seven requests</text>
+        <text x="450" y="219" fill="#4A5A80" text-anchor="middle" font-size="10">same for every team</text>
+
+        <!-- portal <-> runner -->
+        <path d="M244 170 L332 170" stroke="#6B7A9E" stroke-width="1.5"/>
+        <path d="M252 164 L242 170 L252 176" fill="none" stroke="#6B7A9E" stroke-width="1.5"/>
+        <path d="M324 164 L334 170 L324 176" fill="none" stroke="#6B7A9E" stroke-width="1.5"/>
+        <text x="288" y="158" fill="#6B7A9E" text-anchor="middle" font-size="10">HTTP</text>
+
+        <!-- report -->
+        <path d="M560 180 L648 180" stroke="#FF3D6E" stroke-width="1.5"/>
+        <path d="M640 174 L650 180 L640 186" fill="none" stroke="#FF3D6E" stroke-width="1.5"/>
+        <rect x="652" y="132" width="224" height="96" fill="#0B1020" stroke="#FF3D6E"/>
+        <text x="764" y="158" fill="#FF3D6E" text-anchor="middle" font-size="10" letter-spacing="1.5">YOU COMMIT IT</text>
+        <text x="764" y="182" fill="#E6ECFF" text-anchor="middle" font-size="13" font-weight="700">acceptance-report.txt</text>
+        <text x="764" y="204" fill="#6B7A9E" text-anchor="middle" font-size="10">PASS / FAIL, tier by tier</text>
+        <text x="764" y="219" fill="#4A5A80" text-anchor="middle" font-size="10">judges read this first</text>
+
+        <!-- footer rule -->
+        <path d="M24 262 L876 262" stroke="#1B2540"/>
+        <text x="24" y="284" fill="#3A4A70" font-size="10" letter-spacing="1.5">TEAL = WE GIVE IT TO YOU</text>
+        <text x="380" y="284" fill="#8A4A66" font-size="10" letter-spacing="1.5">PINK = YOU WRITE IT</text>
+      </g>
+    </svg>
+  </figure>
+
+  <div class="cols">
+    <div>
+      <div class="mini">[ WHAT YOU DO ]</div>
+      <ul class="pl">
+        <li>Load <strong>fixtures.json</strong> into your portal when it boots.</li>
+        <li>Write <strong>.dogfood.toml</strong>, about ten lines, at your repo root.</li>
+        <li>Run <strong>run.py</strong> and save what it prints.</li>
+        <li>Commit the report, whatever it says.</li>
+      </ul>
+    </div>
+    <div>
+      <div class="mini">[ WHAT WE DO NOT ASK ]</div>
+      <ul class="pl no">
+        <li>No fixed API routes. Yours are yours.</li>
+        <li>No required framework, language or database.</li>
+        <li>No login format. We never log in.</li>
+        <li>No schema. Load the fixtures however you like.</li>
+      </ul>
+    </div>
+  </div>
+ </div>
+</section>
+
+<!-- ================= 02 REPO ================= -->
+<section class="sec">
+ <div class="wrap">
+  <div class="slab"><span class="num">02</span><span class="txt">[ 02 / YOUR REPO ]</span><span class="rl"></span></div>
+  <h2 class="sh">What we open when we clone you</h2>
+  <p class="sb">Three files at the root are ours. The documents are listed on the main site. Everything else is yours, arranged however you like.</p>
+
+  <div class="cbox" data-copy="your-repo/
+  .dogfood.toml
+  acceptance-report.txt
+  docker-compose.yml
+  README.md
+  ARCHITECTURE.md
+  DATA-MODEL.md
+  JUDGING.md
+  LICENSE
+  src/
+  tests/">
+    <div class="cbar"><span class="fn">FIG. 02 · REPO ROOT</span><button class="cbtn" type="button">[ Copy ]</button></div>
+    <pre class="ccode" style="font-family:'Courier Prime',monospace;font-weight:700;line-height:1.85"> your-repo/
+ ├── <span class="k">.dogfood.toml</span>          <span class="c">← where things are, and what you claim</span>
+ ├── <span class="k">acceptance-report.txt</span>  <span class="c">← what run.py printed</span>
+ ├── <span class="k">docker-compose.yml</span>     <span class="c">← one command to a working portal</span>
+ ├── README.md             <span class="c">← what it does, how to run, honest limits</span>
+ ├── ARCHITECTURE.md       <span class="c">← how it is put together, and why</span>
+ ├── DATA-MODEL.md         <span class="c">← your schema, and the way in and out</span>
+ ├── JUDGING.md            <span class="c">← assignment, scoring, normalization</span>
+ ├── LICENSE               <span class="c">← any OSI approved one</span>
+ ├── src/                  <span class="g">← yours. any shape.</span>
+ └── tests/                <span class="g">← yours. any shape.</span></pre>
+  </div>
+  <p class="sb" style="color:#6B7A9E">Plus the five minute demo video, linked wherever you like.</p>
+ </div>
+</section>
+
+<!-- ================= 03 TOML ================= -->
+<section class="sec alt">
+ <div class="wrap">
+  <div class="slab"><span class="num">03</span><span class="txt">[ 03 / .DOGFOOD.TOML ]</span><span class="rl"></span></div>
+  <h2 class="sh">Ten lines that make you checkable</h2>
+  <p class="sb">Forty teams are building forty different portals. If we demanded a fixed set of routes we would be designing your API for you. So we do the opposite: build what you want, then write down where it ended up.</p>
+
+  <div class="cbox">
+    <div class="cbar"><span class="fn">.dogfood.toml</span><button class="cbtn" type="button">[ Copy ]</button></div>
+<pre class="ccode">[portal]
+base_url = "http://localhost:8080"
+
+[tiers]
+claimed = ["T1", "T2"]
+pitch = "One sentence on what you built."
+
+[auth]
+# Whatever header proves you are this role. A cookie, a
+# bearer token, a basic auth string. Your seed script
+# prints these when the portal boots.
+organizer   = "Cookie: session=org_7f2a"
+judge_a     = "Cookie: session=jdg_a_91bc"
+judge_b     = "Cookie: session=jdg_b_44de"
+participant = "Cookie: session=prt_2e88"
+
+[routes]
+gallery      = "/projects"
+submit       = "/projects/new"
+judge_scores = "/api/judge/scores"
+peer_scores  = "/api/judge/scores?judge=judge_a"
+csv_export   = "/api/export.csv"</pre>
+  </div>
+
+  <div class="cols">
+    <div>
+      <div class="mini">[ AUTH ]</div>
+      <p class="sb" style="font-size:12.5px">The checker never logs in. Logging in is the one thing no two stacks do alike, so instead you hand over a working header and we attach it. Your login page can work however you want. Make your seed script print these four headers when the portal boots and this takes a minute to fill in.</p>
+    </div>
+    <div>
+      <div class="mini">[ PEER_SCORES ]</div>
+      <p class="sb" style="font-size:12.5px">This is the url that, in your portal, would return judge A's scores. A query parameter, a path like <samp style="color:#FF3D6E">/api/judges/jdg_01/scores</samp>, anything. We visit it as judge B, who should be turned away. We ask you for the url rather than dictating one, because your API is yours.</p>
+    </div>
+  </div>
+
+  <div class="warn"><b>claimed</b> is on your honour, and it is checked. Put down the tiers you believe you finished. The checker prints what it verified next to what you claimed. Claiming T1 and verifying T1 is a clean result. Saying you got further than you did is the one thing that actually costs points.</div>
+ </div>
+</section>
+
+<!-- ================= 04 FIXTURES ================= -->
+<section class="sec">
+ <div class="wrap">
+  <div class="slab"><span class="num">04</span><span class="txt">[ 04 / FIXTURES.JSON ]</span><span class="rl"></span></div>
+  <h2 class="sh">The same fake data in every portal</h2>
+  <p class="sb">If everyone seeds their own demo data, a judge opening two portals is comparing test data, not software. One team seeds three tidy projects, another seeds forty messy ones, and the tidy one looks better for no good reason. Shared fixtures remove that.</p>
+  <p class="sb">It contains awkward cases on purpose: a judge who gave every project the same score, two review batches nobody finished, one duplicate submission. Those happen at real hackathons and how your portal copes is interesting.</p>
+
+  <div class="cbox">
+    <div class="cbar"><span class="fn">fixtures.json · shape</span><button class="cbtn" type="button">[ Copy ]</button></div>
+<pre class="ccode">{
+  "event": {
+    "id": "evt_01",
+    "name": "Sample Hack 2026",
+    "submissions_close": "2026-03-01T18:00:00Z"
+  },
+  "tracks":   [ { "id": "trk_01", "name": "Developer tools" } ],
+  "judges":   [ { "id": "jdg_01", "name": "Ada Okonkwo",
+                  "email": "ada@example.org", "tracks": ["trk_01"] } ],
+  "teams":    [ { "id": "tm_01", "name": "Nightshift",
+                  "members": ["ada@example.org"] } ],
+  "projects": [ { "id": "prj_01", "team": "tm_01", "track": "trk_01",
+                  "title": "Quiet Hours", "summary": "One line.",
+                  "repo_url": "https://example.org/repo",
+                  "submitted_at": "2026-02-28T22:14:00Z" } ],
+  "scores":   [ { "judge": "jdg_01", "project": "prj_01",
+                  "criteria": { "functionality": 4, "quality": 3 },
+                  "comment": "Text, sometimes empty." } ]
+}</pre>
+  </div>
+
+  <div class="cols">
+    <div>
+      <p class="sb" style="font-size:12.5px">Every id is a string. Every timestamp is ISO 8601 in UTC. Some score entries are missing on purpose. Your portal should not fall over when one project has two reviews and its neighbour has five.</p>
+      <p class="sb" style="font-size:12.5px;color:#6B7A9E">You do not have to store it in this shape. Load it, transform it, put it in whatever schema you can defend. The file is input, not your data model.</p>
+    </div>
+    <div style="border:1px solid #00E5D0;padding:20px">
+      <div class="mini" style="color:#00E5D0">[ IT IS ALREADY HERE ]</div>
+      <p class="sb" style="font-size:12.5px;margin-bottom:14px">We are not holding anything back. The real file, all forty projects and every awkward case, is downloadable right now. Load it, poke at it, design your schema against the actual data rather than the sample.</p>
+      <a class="sp-cta" href="fixtures.json" download style="display:inline-flex;background:#00E5D0;color:#0B1020;font:700 11px/1 'JetBrains Mono',monospace;letter-spacing:.18em;text-transform:uppercase;padding:13px 18px;border:1px solid #00E5D0;transition:background .12s linear,color .12s linear">[ Download fixtures.json ]</a>
+    </div>
+  </div>
+ </div>
+</section>
+
+<!-- ================= 05 CHECKS ================= -->
+<section class="sec alt" id="checks">
+ <div class="wrap">
+  <div class="slab"><span class="num">05</span><span class="txt">[ 05 / THE SEVEN CHECKS ]</span><span class="rl"></span></div>
+  <h2 class="sh">Everything run.py asks your portal</h2>
+  <p class="sb">All seven, in full. Nothing hidden, nothing extra. Each is behaviour you were building anyway.</p>
+
+  <div class="cbox" style="margin-bottom:26px">
+    <div class="cbar"><span class="fn">run it</span><button class="cbtn" type="button">[ Copy ]</button></div>
+<pre class="ccode">python3 run.py .dogfood.toml > acceptance-report.txt</pre>
+  </div>
+  <p class="sb" style="color:#6B7A9E;margin-top:-6px">Any Python 3, including the one already on your Mac. Standard library only, nothing to install. Keep fixtures.json next to run.py and it will find it.</p>
+
+  <div style="display:flex;flex-wrap:wrap;gap:1px;background:#1B2540;border:1px solid #1B2540;margin:24px 0 28px">
+    <div class="chk" style="flex:1 1 300px"><p class="cn">T1 · A stranger can browse the gallery.</p><p class="cr">GET {routes.gallery}
+no auth header
+<b>expect 200</b></p></div>
+    <div class="chk" style="flex:1 1 300px"><p class="cn">T1 · The gallery shows fixture projects.</p><p class="cr">GET {routes.gallery}
+<b>expect a known fixture title in the body</b></p></div>
+    <div class="chk" style="flex:1 1 300px"><p class="cn">T1 · A closed event refuses submissions.</p><p class="cr">POST {routes.submit}
+as participant
+<b>expect 4xx</b></p></div>
+    <div class="chk" style="flex:1 1 300px"><p class="cn">T2 · A judge can read their own scores.</p><p class="cr">GET {routes.judge_scores}
+as judge_a
+<b>expect 200</b></p></div>
+    <div class="chk" style="flex:1 1 300px;border-color:#FF3D6E"><p class="cn" style="color:#FF3D6E">T2 · A judge cannot read a peer's scores.</p><p class="cr">GET {routes.peer_scores}
+as judge_b
+<b style="color:#FF3D6E">expect 401 or 403</b></p></div>
+    <div class="chk" style="flex:1 1 300px"><p class="cn">T2 · A participant is not a judge.</p><p class="cr">GET {routes.judge_scores}
+as participant
+<b>expect 401 or 403</b></p></div>
+    <div class="chk" style="flex:1 1 300px"><p class="cn">T2 · An organizer can export CSV.</p><p class="cr">GET {routes.csv_export}
+as organizer
+<b>expect 200 and a CSV body</b></p></div>
+    <div class="chk" style="flex:1 1 300px;background:#0E1428"><p class="cn" style="color:#6B7A9E">That is the whole list.</p><p class="cr">The checker does not look at your HTML,
+your framework, your database, your file
+layout or your commit history.</p></div>
+  </div>
+
+  <p class="sb" style="color:#6B7A9E;font-size:12.5px">On the closed event check: the fixture event's <samp style="color:#FF3D6E">submissions_close</samp> is a date in the past, so if you seeded honestly your portal is already closed and this post has to be refused. It does not manipulate a clock and it does not inspect why you refused. Seed with the fixture's close date rather than one of your own and it passes first try.</p>
+
+  <h2 class="sh" style="margin-top:44px">The one that costs the most points</h2>
+  <p class="sb">Hiding another judge's scores in your template is not refusing. The check has to live in the backend, because the backend is where curl arrives.</p>
+
+  <figure class="fg">
+    <figcaption><span class="t">FIG. 03 · ROLE ISOLATION</span><span style="color:#FF3D6E">BACKEND, NOT TEMPLATE</span></figcaption>
+    <svg viewBox="0 0 900 300" role="img" aria-labelledby="fig3t fig3d" style="max-width:100%">
+      <title id="fig3t">Role isolation, right and wrong</title>
+      <desc id="fig3d">On the left the backend refuses judge B with 403 and judge A's scores stay inside. On the right the check lives only in the template, the backend returns 200, and the scores leak.</desc>
+      <g font-family="'Space Mono',monospace" font-size="11">
+
+        <!-- LEFT: right way -->
+        <rect x="16" y="16" width="424" height="268" fill="#0B1020" stroke="#00E5D0"/>
+        <text x="32" y="42" fill="#00E5D0" font-size="12" letter-spacing="1.6">RIGHT · CHECK IN THE BACKEND</text>
+
+        <text x="32" y="86" fill="#E6ECFF" font-size="12">judge_b</text>
+        <text x="32" y="104" fill="#6B7A9E" font-size="10">curl, logged in</text>
+        <path d="M110 88 L196 88" stroke="#FF3D6E" stroke-width="1.5"/>
+        <path d="M188 82 L198 88 L188 94" fill="none" stroke="#FF3D6E" stroke-width="1.5"/>
+
+        <rect x="200" y="60" width="216" height="58" fill="#121A32" stroke="#00E5D0"/>
+        <text x="308" y="84" fill="#00E5D0" text-anchor="middle" font-size="18" font-weight="700">403</text>
+        <text x="308" y="104" fill="#6B7A9E" text-anchor="middle" font-size="10">refused at the API</text>
+
+        <rect x="200" y="150" width="216" height="110" fill="#0E1428" stroke="#1B2540"/>
+        <text x="308" y="176" fill="#6B7A9E" text-anchor="middle" font-size="10" letter-spacing="1.4">JUDGE_A SCORES</text>
+        <text x="308" y="204" fill="#E6ECFF" text-anchor="middle" font-size="12">4 · 3 · 5 · 2</text>
+        <text x="308" y="228" fill="#00E5D0" text-anchor="middle" font-size="11">stays inside</text>
+        <path d="M308 118 L308 146" stroke="#1B2540" stroke-dasharray="3 5"/>
+
+        <!-- RIGHT: wrong way -->
+        <rect x="460" y="16" width="424" height="268" fill="#0B1020" stroke="#FF3D6E"/>
+        <text x="476" y="42" fill="#FF3D6E" font-size="12" letter-spacing="1.6">WRONG · HIDDEN IN THE TEMPLATE</text>
+
+        <text x="476" y="86" fill="#E6ECFF" font-size="12">judge_b</text>
+        <text x="476" y="104" fill="#6B7A9E" font-size="10">same curl</text>
+        <path d="M554 88 L640 88" stroke="#FF3D6E" stroke-width="1.5"/>
+        <path d="M632 82 L642 88 L632 94" fill="none" stroke="#FF3D6E" stroke-width="1.5"/>
+
+        <rect x="644" y="60" width="216" height="58" fill="#2A0F1E" stroke="#FF3D6E"/>
+        <text x="752" y="84" fill="#FF3D6E" text-anchor="middle" font-size="18" font-weight="700">200</text>
+        <text x="752" y="104" fill="#8A4A66" text-anchor="middle" font-size="10">the button was hidden</text>
+        <text x="752" y="134" fill="#8A4A66" text-anchor="middle" font-size="10">the api was not</text>
+
+        <rect x="644" y="150" width="216" height="110" fill="#0E1428" stroke="#FF3D6E" stroke-dasharray="4 4"/>
+        <text x="752" y="176" fill="#6B7A9E" text-anchor="middle" font-size="10" letter-spacing="1.4">JUDGE_A SCORES</text>
+        <text x="752" y="204" fill="#FF3D6E" text-anchor="middle" font-size="12">4 · 3 · 5 · 2</text>
+        <text x="752" y="228" fill="#FF3D6E" text-anchor="middle" font-size="11">leaked</text>
+        <path d="M752 142 L752 146" stroke="#FF3D6E" stroke-width="1.5"/>
+        <path d="M746 138 L752 148 L758 138" fill="none" stroke="#FF3D6E" stroke-width="1.5"/>
+      </g>
+    </svg>
+  </figure>
+  <p class="sb" style="color:#6B7A9E;font-size:12.5px">This is the most common way a good looking project loses points, and it usually takes one <samp style="color:#FF3D6E">if</samp> statement to get right.</p>
+ </div>
+</section>
+
+<!-- ================= 06 REPORT ================= -->
+<section class="sec">
+ <div class="wrap">
+  <div class="slab"><span class="num">06</span><span class="txt">[ 06 / THE REPORT ]</span><span class="rl"></span></div>
+  <h2 class="sh">Your receipt</h2>
+  <p class="sb">It is whatever run.py printed, redirected to a file. There is nothing to write by hand and no format to follow. A judge opens it and knows in five seconds what runs.</p>
+
+  <figure class="fg" id="repfig" style="background:#0B1020" data-copy="DOGFOOD 2026 acceptance report
+portal: http://localhost:8080
+claimed: T1 T2
+fixtures: fixtures.json
+
+T1  gallery is public ................. PASS
+T1  project from fixtures shown ....... PASS
+T1  closed event refuses submissions .. PASS
+T2  judge sees own scores ............. PASS
+T2  judge cannot see peer scores ...... FAIL
+       GET http://localhost:8080/api/judge/scores?judge=judge_a
+       sent as judge_b; this is the url that returns judge_a's scores
+       got 200, wanted 401 or 403
+       the backend returned another judge's scores
+T2  participant blocked ............... PASS
+T2  csv export works .................. PASS
+
+claimed T1 T2, verified T1
+note: claimed but not verified: T2">
+    <figcaption><span class="t">FIG. 04 · REPORT ANATOMY</span><button class="cbtn" type="button">[ Copy ]</button></figcaption>
+<pre class="ccode" style="background:#0B1020;padding:24px 18px;margin:0">DOGFOOD 2026 acceptance report
+portal: http://localhost:8080
+claimed: T1 T2
+fixtures: fixtures.json
+
+T1  gallery is public ................. <span class="g">PASS</span>
+T1  project from fixtures shown ....... <span class="g">PASS</span>
+T1  closed event refuses submissions .. <span class="g">PASS</span>
+T2  judge sees own scores ............. <span class="g">PASS</span>
+T2  judge cannot see peer scores ...... <span class="k">FAIL</span>       <span class="c">&lt;-- 2</span>
+       <span class="c">GET http://localhost:8080/api/judge/scores?judge=judge_a</span>
+       <span class="c">sent as judge_b; this is the url that returns judge_a's scores</span>
+       <span class="c">got 200, wanted 401 or 403</span>
+       <span class="c">the backend returned another judge's scores</span>
+T2  participant blocked ............... <span class="g">PASS</span>
+T2  csv export works .................. <span class="g">PASS</span>   <span class="c">&lt;-- 1</span>
+
+claimed T1 T2, verified T1                       <span class="c">&lt;-- 3</span>
+note: claimed but not verified: T2</pre>
+  </figure>
+
+  <div class="cols">
+    <div class="chk"><p class="cn" style="color:#00E5D0">1 · The verdict column</p><p class="cr">One word per check. This is what a judge scans.</p></div>
+    <div class="chk"><p class="cn" style="color:#FF3D6E">2 · The detail under a FAIL</p><p class="cr">The exact request, who sent it, what came back and what was wanted. Enough to fix it without guessing.</p></div>
+    <div class="chk"><p class="cn" style="color:#E6ECFF">3 · The last line</p><p class="cr">What you claimed against what was verified. A gap here is the only thing that costs you.</p></div>
+  </div>
+
+  <div class="warn" style="margin-top:26px">Commit the report even when it has failures in it. A report with two honest <b>FAIL</b> lines reads better than a README claiming everything works. Write the gaps into your README too, in your own words. We run the same checker, so there is no advantage in hiding anything.</div>
+ </div>
+</section>
+
+<!-- ================= 07 LADDER ================= -->
+<section class="sec alt" id="ladder">
+ <div class="wrap">
+  <div class="slab"><span class="num">07</span><span class="txt">[ 07 / THE LADDER ]</span><span class="rl"></span></div>
+  <h2 class="sh">Climb as far as you get</h2>
+  <p class="sb">The full version is on the main site. This is the pocket copy. T1 is the floor. A clean T2 beats a broken T4, because correctness is worth more than breadth.</p>
+
+  <figure class="fg">
+    <figcaption><span class="t">FIG. 05 · TIER LADDER</span><span style="color:#00E5D0">T1 IS THE FLOOR</span></figcaption>
+    <svg viewBox="0 0 900 340" role="img" aria-labelledby="fig5t fig5d" style="max-width:100%">
+      <title id="fig5t">The four tiers as a staircase</title>
+      <desc id="fig5d">T1 core is the floor and must be cleared to be scored. T2 judging, T3 public and T4 stretch build on top of it.</desc>
+      <g font-family="'Space Mono',monospace" font-size="11">
+        <!-- T1 -->
+        <rect x="16" y="244" width="210" height="72" fill="#121A32" stroke="#00E5D0"/>
+        <text x="32" y="270" fill="#00E5D0" font-size="16" font-weight="700">T1</text>
+        <text x="70" y="270" fill="#E6ECFF" font-size="13" letter-spacing="3">CORE</text>
+        <text x="32" y="292" fill="#6B7A9E" font-size="10">login, roles, events, teams,</text>
+        <text x="32" y="306" fill="#6B7A9E" font-size="10">submissions, gallery, deadline</text>
+        <rect x="16" y="230" width="210" height="14" fill="#00E5D0"/>
+        <text x="121" y="241" fill="#0B1020" text-anchor="middle" font-size="9" letter-spacing="2">THE FLOOR</text>
+        <!-- T2 -->
+        <rect x="234" y="176" width="210" height="140" fill="#0B1020" stroke="#1B2540"/>
+        <text x="250" y="202" fill="#FF3D6E" font-size="16" font-weight="700">T2</text>
+        <text x="288" y="202" fill="#E6ECFF" font-size="13" letter-spacing="3">JUDGING</text>
+        <text x="250" y="224" fill="#6B7A9E" font-size="10">assignment, weighted rubric,</text>
+        <text x="250" y="238" fill="#6B7A9E" font-size="10">role isolation, progress view,</text>
+        <text x="250" y="252" fill="#6B7A9E" font-size="10">normalization, CSV export</text>
+        <!-- T3 -->
+        <rect x="452" y="108" width="210" height="208" fill="#0B1020" stroke="#1B2540"/>
+        <text x="468" y="134" fill="#FF3D6E" font-size="16" font-weight="700">T3</text>
+        <text x="506" y="134" fill="#E6ECFF" font-size="13" letter-spacing="3">PUBLIC</text>
+        <text x="468" y="156" fill="#6B7A9E" font-size="10">voting, comments, hidden</text>
+        <text x="468" y="170" fill="#6B7A9E" font-size="10">results, random ballot order,</text>
+        <text x="468" y="184" fill="#6B7A9E" font-size="10">an answer to people cheating</text>
+        <!-- T4 -->
+        <rect x="670" y="40" width="210" height="276" fill="#0B1020" stroke="#1B2540"/>
+        <text x="686" y="66" fill="#FF3D6E" font-size="16" font-weight="700">T4</text>
+        <text x="724" y="66" fill="#E6ECFF" font-size="13" letter-spacing="3">STRETCH</text>
+        <text x="686" y="88" fill="#6B7A9E" font-size="10">REST API, webhooks,</text>
+        <text x="686" y="102" fill="#6B7A9E" font-size="10">certificates, verifiable judge</text>
+        <text x="686" y="116" fill="#6B7A9E" font-size="10">records, widget, bulk import</text>
+        <!-- the point of the picture, in the space the staircase leaves -->
+        <text x="32" y="74" fill="#E6ECFF" font-size="15" font-weight="700">Clear T1 or you are not scored.</text>
+        <text x="32" y="102" fill="#AEBAD6" font-size="12">How far you climbed after that is 40% of your score.</text>
+        <text x="32" y="124" fill="#AEBAD6" font-size="12">Correctness beats reaching for the next tier.</text>
+        <text x="32" y="152" fill="#00E5D0" font-size="12">A clean T2 beats a broken T4.</text>
+        <!-- baseline -->
+        <path d="M16 320 L884 320" stroke="#1B2540"/>
+      </g>
+    </svg>
+  </figure>
+ </div>
+</section>
+
+<!-- ================= 08 TIMELINE ================= -->
+<section class="sec" id="when">
+ <div class="wrap">
+  <div class="slab"><span class="num">08</span><span class="txt">[ 08 / WHEN ]</span><span class="rl"></span></div>
+  <h2 class="sh">Seventy two hours</h2>
+
+  <figure class="fg">
+    <figcaption><span class="t">FIG. 06 · THE WEEKEND</span><span style="color:#00E5D0">ALL TIMES UTC</span></figcaption>
+    <svg viewBox="0 0 900 200" role="img" aria-labelledby="fig6t fig6d" style="max-width:100%">
+      <title id="fig6t">The event timeline</title>
+      <desc id="fig6d">Spec published Thursday 24 September, with every file already downloadable. Kickoff Saturday 26 September 18:00 UTC, when building may begin. Code freeze Tuesday 29 September 18:00 UTC.</desc>
+      <g font-family="'Space Mono',monospace" font-size="11">
+        <!-- planning band -->
+        <rect x="16" y="76" width="220" height="40" fill="#16203A" stroke="#1B2540"/>
+        <text x="126" y="101" fill="#6B7A9E" text-anchor="middle" font-size="11">read and plan</text>
+        <!-- build band -->
+        <rect x="236" y="76" width="480" height="40" fill="#121A32" stroke="#00E5D0"/>
+        <text x="476" y="101" fill="#E6ECFF" text-anchor="middle" font-size="12" font-weight="700">72 hours of building</text>
+        <!-- judging band -->
+        <rect x="716" y="76" width="168" height="40" fill="#16203A" stroke="#1B2540"/>
+        <text x="800" y="101" fill="#6B7A9E" text-anchor="middle" font-size="11">judging</text>
+
+        <!-- markers -->
+        <path d="M236 60 L236 132" stroke="#00E5D0" stroke-width="2"/>
+        <path d="M716 60 L716 132" stroke="#FF3D6E" stroke-width="3"/>
+
+        <text x="16" y="48" fill="#6B7A9E" font-size="10" letter-spacing="1.6">THU 24 SEP</text>
+        <text x="16" y="160" fill="#AEBAD6" font-size="11">spec published</text>
+        <text x="16" y="176" fill="#4A5A80" font-size="10">no project code yet</text>
+
+        <text x="246" y="48" fill="#00E5D0" font-size="10" letter-spacing="1.6">SAT 26 SEP · 18:00</text>
+        <text x="246" y="160" fill="#E6ECFF" font-size="11">kickoff</text>
+        <text x="246" y="176" fill="#4A5A80" font-size="10">nothing new drops. the clock starts.</text>
+
+        <text x="620" y="48" fill="#FF3D6E" font-size="10" letter-spacing="1.6">TUE 29 SEP · 18:00</text>
+        <text x="620" y="160" fill="#E6ECFF" font-size="11">code freeze</text>
+        <text x="620" y="176" fill="#4A5A80" font-size="10">report committed, repo submitted</text>
+      </g>
+    </svg>
+  </figure>
+
+  <div class="cols">
+    <div>
+      <div class="mini">[ BEFORE KICKOFF ]</div>
+      <ul class="pl">
+        <li>Read this page and the main site.</li>
+        <li>Pick a stack you already know.</li>
+        <li>Sketch a schema against the fixtures shape above.</li>
+        <li>Form your team. One to four people, solo is fine.</li>
+      </ul>
+    </div>
+    <div>
+      <div class="mini">[ NOT BEFORE KICKOFF ]</div>
+      <ul class="pl no">
+        <li>Project code. That starts Saturday at 18:00 UTC.</li>
+      </ul>
+      <p class="sb" style="font-size:12.5px;color:#00E5D0">Every file is already on this page, <samp style="color:#00E5D0">run.py</samp> and <samp style="color:#00E5D0">fixtures.json</samp> included. Nothing drops on Saturday. Download them now, read the checker, load the data, and arrive on Saturday knowing exactly what you are building toward.</p>
+      <p class="sb" style="font-size:12.5px;color:#6B7A9E">Planning, reading and sketching are all fine and encouraged. Frameworks, libraries, boilerplate generators and AI tools are fine too. New code only means you do not arrive with the portal already written.</p>
+    </div>
+  </div>
+ </div>
+</section>
+
+<!-- ================= 09 BONUS ================= -->
+<section class="sec alt">
+ <div class="wrap">
+  <div class="slab"><span class="num">09</span><span class="txt">[ 09 / BONUS POINTS ]</span><span class="rl"></span></div>
+  <h2 class="sh">They break ties. They do not add up.</h2>
+  <div class="warn" style="max-width:74ch">Your score is the weighted average of the four published criteria, on a scale of <b>0 to 5</b>. <b>Bonus points do not change it.</b> What they do is separate two projects that land on the same number, and decide the Best Judging Engine prize.</div>
+  <p class="sb">There are four of them on the main site: a normalization proof, a pairwise judging mode, a threat model, and an API first design. Attempt any, all, or none. Do them because the problems are genuinely interesting, or because you want an edge in a photo finish. Not because you are chasing arithmetic.</p>
+ </div>
+</section>
+
+<!-- ================= 10 FREEDOM ================= -->
+<section class="sec">
+ <div class="wrap">
+  <div class="slab"><span class="num">10</span><span class="txt">[ 10 / YOUR CALL ]</span><span class="rl"></span></div>
+  <h2 class="sh">What we do not check</h2>
+  <p class="sb">Worth saying out loud, because listed as rules it would be most of this page.</p>
+  <div style="border:1px solid #1B2540;background:#0E1428;padding:clamp(20px,3vw,34px);margin:0 0 22px">
+    <p style="margin:0;max-width:72ch;font:400 14px/2 'JetBrains Mono',monospace;color:#AEBAD6">Your language. Your framework. Your database. Your ORM, or the absence of one. Your schema. Your route names. Your CSS, your component library, your lack of a component library. Your repo layout. Your commit style. Your branch names. Whether you wrote tests and how many. Whether you used Claude Code, Cursor, Copilot or none of them. How you split work between teammates. Whether you sleep.</p>
+  </div>
+  <p class="sb" style="color:#00E5D0">Pick what you know. A boring stack you are fluent in will get further in 72 hours than an exciting one you are learning.</p>
+ </div>
+</section>
+
+<!-- ================= 11 REQUIRED ================= -->
+<section class="sec alt teal" id="required">
+ <div class="wrap">
+  <div class="slab"><span class="num">11</span><span class="txt">[ 11 / THE FIVE THINGS ]</span><span class="rl"></span></div>
+  <h2 class="sh">Everything that is actually required</h2>
+
+  <div class="cbox" data-copy="DOGFOOD 2026 · the five required things
+
+1. docker compose up brings up a working, seeded portal with the
+   network off. No cloud accounts, no hosted database, no external API.
+2. An OSI approved license in the repo. MIT or Apache-2.0 preferred.
+3. Code written during the event window. Frameworks, libraries,
+   boilerplate generators and AI tools are all fine.
+4. .dogfood.toml at the repo root, with honest tier claims.
+5. acceptance-report.txt committed, whatever it says.
+
+Plus the documents: README.md, ARCHITECTURE.md, DATA-MODEL.md,
+JUDGING.md, and the five minute demo video.
+
+Full spec: https://dogfoodhack.com/spec">
+    <div class="cbar"><span class="fn">the checklist</span><button class="cbtn" type="button">[ Copy all ]</button></div>
+<pre class="ccode" style="line-height:1.9">1  <span class="k">docker compose up</span> brings up a working, seeded portal with the
+   network off. No cloud accounts, no hosted database, no external API.
+
+2  An <span class="k">OSI approved license</span> in the repo. MIT or Apache-2.0 preferred.
+
+3  <span class="k">Code written during the event window.</span> Frameworks, libraries,
+   boilerplate generators and AI tools are all fine.
+
+4  <span class="k">.dogfood.toml</span> at the repo root, with honest tier claims.
+
+5  <span class="k">acceptance-report.txt</span> committed, whatever it says.
+
+   <span class="c">Plus the documents: README.md, ARCHITECTURE.md, DATA-MODEL.md,</span>
+   <span class="c">JUDGING.md, and the five minute demo video.</span></pre>
+  </div>
+
+  <div class="cols" style="margin-top:34px">
+    <div>
+      <div class="mini">[ DOWNLOADS ]</div>
+      <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start">
+        <a class="sp-cta" href="spec.md" download style="display:inline-flex;background:#0B1020;color:#FF3D6E;font:700 11px/1 'JetBrains Mono',monospace;letter-spacing:.18em;text-transform:uppercase;padding:13px 18px;border:1px solid #FF3D6E;transition:background .12s linear,color .12s linear">[ spec.md · the full text ]</a>
+        <a class="sp-cta" href="run.py" download style="display:inline-flex;background:#0B1020;color:#FF3D6E;font:700 11px/1 'JetBrains Mono',monospace;letter-spacing:.18em;text-transform:uppercase;padding:13px 18px;border:1px solid #FF3D6E;transition:background .12s linear,color .12s linear">[ run.py · the checker ]</a>
+        <a class="sp-cta" href="example.dogfood.toml" download style="display:inline-flex;background:#0B1020;color:#FF3D6E;font:700 11px/1 'JetBrains Mono',monospace;letter-spacing:.18em;text-transform:uppercase;padding:13px 18px;border:1px solid #FF3D6E;transition:background .12s linear,color .12s linear">[ example .dogfood.toml ]</a>
+        <a class="sp-cta" href="context.txt" download style="display:inline-flex;background:#0B1020;color:#00E5D0;font:700 11px/1 'JetBrains Mono',monospace;letter-spacing:.18em;text-transform:uppercase;padding:13px 18px;border:1px solid #00E5D0;transition:background .12s linear,color .12s linear">[ context.txt · everything in one file ]</a>
+        <a class="sp-cta" href="fixtures.json" download style="display:inline-flex;background:#0B1020;color:#FF3D6E;font:700 11px/1 'JetBrains Mono',monospace;letter-spacing:.18em;text-transform:uppercase;padding:13px 18px;border:1px solid #FF3D6E;transition:background .12s linear,color .12s linear">[ fixtures.json · the real data ]</a>
+      </div>
+    </div>
+    <div>
+      <div class="mini">[ IF SOMETHING HERE IS UNCLEAR ]</div>
+      <p class="sb" style="font-size:12.5px">Ask in Discord. If a question comes up twice, this page gets a line added and everyone sees the same answer. An ambiguity found on Wednesday is a fixed spec. The same one found on Saturday is three teams building three different things.</p>
+      <a class="sp-cta" href="https://discord.gg/xfYPDZYqeh" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;margin-top:8px;background:#FF3D6E;color:#0B1020;font:700 11px/1 'JetBrains Mono',monospace;letter-spacing:.18em;text-transform:uppercase;padding:14px 20px;border:1px solid #FF3D6E;transition:background .12s linear,color .12s linear">[ Go to Discord ] <span>&gt;&gt;&gt;</span></a>
+    </div>
+  </div>
+ </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer style="border-top:1px solid #00E5D0;position:relative">
+  <div aria-hidden="true" style="position:absolute;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(90deg,rgba(230,236,255,.05) 1px,transparent 1px),linear-gradient(0deg,rgba(230,236,255,.05) 1px,transparent 1px);background-size:calc(100%/8) 90px"></div>
+  <div style="position:relative;z-index:1;padding:clamp(40px,6vw,80px) clamp(12px,2vw,24px) 0;max-width:1680px;margin:0 auto">
+    <div style="display:flex;flex-wrap:wrap;gap:clamp(24px,3vw,44px) clamp(20px,2.5vw,40px);align-items:flex-start">
+      <div style="flex:2.2 1 340px;min-width:0;max-width:560px">
+        <div style="font-family:'Archivo Black',sans-serif;font-size:clamp(2rem,4.4vw,4.4rem);line-height:.9;letter-spacing:-.05em;color:#E6ECFF;overflow-wrap:anywhere">DOGFOOD<span style="color:#FF3D6E">®</span></div>
+        <p style="margin:20px 0 0;max-width:48ch;font:400 12.5px/1.8 'JetBrains Mono',monospace;color:#6B7A9E">A <a href="https://raptors.dev" target="_blank" rel="noopener">raptors.dev</a> hackathon. Build the submission and judging platform we will actually run. Open source, self-hosted, yours.</p>
+        <a class="sp-cta" href="https://discord.gg/xfYPDZYqeh" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;margin-top:24px;background:#FF3D6E;color:#0B1020;font:700 11px/1 'JetBrains Mono',monospace;letter-spacing:.18em;text-transform:uppercase;padding:14px 20px;border:1px solid #FF3D6E;transition:background .12s linear,color .12s linear">[ Go to Discord ]</a>
+      </div>
+      <div style="flex:1 1 150px;min-width:0">
+        <div style="font:700 10px/1 'JetBrains Mono',monospace;letter-spacing:.2em;text-transform:uppercase;color:#FF3D6E;margin-bottom:16px">This page</div>
+        <div style="display:flex;flex-direction:column;gap:9px;font:400 11.5px/1.35 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase">
+          <a href="#files" style="color:#6B7A9E">Four files</a>
+          <a href="#checks" style="color:#6B7A9E">The checks</a>
+          <a href="#ladder" style="color:#6B7A9E">Tiers</a>
+          <a href="#when" style="color:#6B7A9E">When</a>
+          <a href="#required" style="color:#6B7A9E">Required</a>
+        </div>
+      </div>
+      <div style="flex:1 1 150px;min-width:0">
+        <div style="font:700 10px/1 'JetBrains Mono',monospace;letter-spacing:.2em;text-transform:uppercase;color:#FF3D6E;margin-bottom:16px">The event</div>
+        <div style="display:flex;flex-direction:column;gap:9px;font:400 11.5px/1.35 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase">
+          <a href="/#about" style="color:#6B7A9E">About</a>
+          <a href="/#tiers" style="color:#6B7A9E">Tiers</a>
+          <a href="/#scoring" style="color:#6B7A9E">Scoring</a>
+          <a href="/#prizes" style="color:#6B7A9E">Prizes</a>
+          <a href="/#rules" style="color:#6B7A9E">Rules</a>
+          <a href="/#faq" style="color:#6B7A9E">FAQ</a>
+        </div>
+      </div>
+      <div style="flex:1.4 1 210px;min-width:0">
+        <div style="font:700 10px/1 'JetBrains Mono',monospace;letter-spacing:.2em;text-transform:uppercase;color:#FF3D6E;margin-bottom:16px">Connect</div>
+        <div style="display:flex;flex-direction:column;gap:9px;font:400 11.5px/1.6 'JetBrains Mono',monospace;color:#6B7A9E;overflow-wrap:anywhere">
+          <a href="mailto:hello@raptors.dev">hello@raptors.dev</a>
+          <span>Hackathon Raptors</span>
+          <span>Community Interest Company 15557917</span>
+          <span>Office 2131, 182-184 High Street North,<br>East Ham, London, E6 2JA, United Kingdom</span>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;margin:clamp(32px,5vw,64px) 0 0;padding:20px 0;border-top:1px solid #1B2540;font:400 10px/1.6 'Space Mono',monospace;letter-spacing:.2em;text-transform:uppercase;color:#4A5A80;overflow-wrap:anywhere">
+      <span>© 2026 Dogfood Hackathon · Built by <a href="https://raptors.dev" target="_blank" rel="noopener" style="color:#4A5A80">raptors.dev</a></span>
+      <span>+ 51.5310°N 0.0500°E + REV 2.6 + UNIT / DF-01 ™</span>
+    </div>
+  </div>
+</footer>
+
+<script type="text/plain" id="ctxdata">DOGFOOD 2026 · FULL CONTEXT
+Copied from https://dogfoodhack.com/spec
+
+I am taking part in a hackathon called DOGFOOD. Everything below is the
+complete brief: what to build, how it is scored, and the exact files I
+have to produce. Please answer my questions using this, and tell me when
+something is not covered here rather than guessing.
+
+================================================================
+1. THE EVENT
+================================================================
+
+DOGFOOD is a 72 hour online hackathon run by Hackathon Raptors.
+Free to enter. Teams of one to four people. Prize pool 2,500 USD.
+
+Every team builds the same product: an open source, self hostable
+submission and judging platform for hackathons. The organisers intend to
+fork the winning project, self host it, and run their own events on it.
+The team keeps ownership. No assignment, no transfer, no CLA.
+
+Tagline: "Build the platform that will judge you."
+
+The premise: every existing hackathon platform converged on the same
+nine features and stopped. The market leader cannot weight judging
+criteria. Platforms claim score normalization but none document it.
+Community voting is treated as unfixable. No platform publishes a public
+API. This event is an attempt to build what organisers actually need.
+
+================================================================
+2. TIMELINE, ALL TIMES UTC
+================================================================
+
+Thu 24 Sep 2026            Spec published. No project code yet.
+Sat 26 Sep 2026, 18:00     Kickoff. The clock starts. Nothing new is
+                           released, because nothing is held back.
+Tue 29 Sep 2026, 18:00     Code freeze. Submissions due.
+29 Sep to 8 Oct 2026       Judging window.
+Sun 5 Oct 2026, 18:00      Write Up Quest closes.
+Fri 9 Oct 2026             Winners announced, with the adoption decision.
+
+Before kickoff you may plan, read, sketch schemas and form a team.
+You may not write project code before Saturday 18:00 UTC.
+
+Every file is published with the spec rather than held to kickoff:
+run.py, fixtures.json, the example configuration, all of it. You can read
+exactly what will be checked and load the exact data before you start.
+run.py's full source is in Appendix A below.
+
+================================================================
+3. THE TIER LADDER
+================================================================
+
+Teams claim the tiers they complete and are judged on that claim.
+T1 is the floor. Clear T1 or you are not scored.
+A clean T2 beats a broken T4. Correctness outranks breadth.
+
+T1 CORE
+  Authentication and sessions
+  A real role model: visitor, participant, judge, organizer, admin
+  Event creation with configurable dates, tracks and prizes
+  Team formation by invite link
+  Project submission with draft and edit until the deadline
+  Deadline enforcement that actually holds
+  Public gallery with search and filter
+
+T2 JUDGING
+  Judge invitation and assignment
+  A weighted scoring rubric the organizer can configure
+  Backend enforced role isolation: judges cannot see peer scores
+  A live organizer progress dashboard
+  Cross judge normalization, with the method documented
+  CSV export
+
+T3 PUBLIC
+  Community voting: email gated, link based or authenticated
+  Project comments
+  Results hidden during the voting window
+  Randomized project ordering on ballots
+  Anti abuse: rate limits, duplicate detection, audit trail
+
+T4 STRETCH
+  REST API and webhooks
+  Certificate and record generation
+  Signed, publicly verifiable judge participation records
+  Embeddable gallery widget
+  Bulk import and export
+
+================================================================
+4. SCORING
+================================================================
+
+Five point scale, weighted average across judges.
+
+  Tier Completion and Correctness   40%
+    How far up the ladder you got, verified by the acceptance report
+    rather than by the README. Correctness beats breadth. Honest gap
+    reporting is rewarded. Inflated claims are penalised.
+
+  Judging Integrity                 25%
+    Role isolation enforced in the backend rather than painted on the
+    frontend. A documented and defensible normalization method. An audit
+    trail an organizer can actually read. Abuse considered up front.
+
+  Adoptability and Operability      20%
+    Could this be run in production on Monday. One command to running,
+    seeded with real data, documentation a stranger can follow, a
+    migration path in and out, a clean license.
+
+  Code Quality and Innovation       15%
+    Idiomatic by the standard of a senior reviewer in that stack. A
+    schema worth defending. Design decisions worth stealing.
+
+================================================================
+5. BONUS CHALLENGES
+================================================================
+
+Four optional challenges. You may attempt all four. The organisers'
+advice is to pick one and do it properly: one done well beats four
+started.
+
+  Normalization Proof   Hard    Implement cross judge normalization on
+                                the fixture data and document the method
+                                rigorously.
+  Pairwise Mode         Hard    A Bradley Terry estimator for pairwise
+                                judging comparison.
+  Threat Model          Medium  A written defence against Sybil votes,
+                                ballot stuffing, collusion and similar.
+  API First             Medium  A documented REST API with an OpenAPI
+                                spec.
+
+IMPORTANT: bonus points do NOT change your score. Your score is the
+weighted average of the four criteria above, on a scale of 0 to 5.
+Bonuses break ties between projects that land on the same number, and
+they decide the Best Judging Engine prize.
+
+================================================================
+6. RULES
+================================================================
+
+  1. Open source under an OSI approved license. MIT or Apache-2.0
+     preferred. You retain ownership.
+  2. Clear T1 or you are not judged.
+  3. New code only, written during the 72 hour window. Frameworks,
+     libraries, boilerplate generators and AI tools are all fine. New
+     code only means you do not arrive with the portal already written.
+  4. No hosted dependencies. It must run offline on a laptop.
+  5. Honest tier claims, declared in .dogfood.toml. Overclaiming is
+     penalised.
+  6. Team size one to four. Solo is welcome.
+  7. Public GitHub repo. Anonymous usernames are accepted as long as the
+     team is reachable.
+  8. AI tools are expected. Claude Code, Cursor, Copilot, all fair game.
+     You are judged on whether it runs and on schema quality, not on
+     whether you used AI.
+  9. Role isolation must be enforced in the backend or API, not just in
+     the UI.
+
+THE ONE COMMAND RULE
+  "If it does not come up on a laptop with the network off, we cannot
+  adopt it, and adoption is the entire point."
+
+  docker compose up must start a fully functional, seeded portal on
+  localhost with zero external dependencies. No cloud accounts, no
+  hosted databases, no external APIs, no authentication as a service.
+
+OUT OF SCOPE, AUTOMATIC DISQUALIFICATION
+  Design mockups or a hardcoded frontend with no backend.
+  Anything requiring cloud accounts or hosted services.
+  Role checks only in the frontend. A curl test must fail for
+    unauthorized access.
+  A gallery with no judging, or judging with no gallery.
+  Closed source, or a non OSI approved license.
+  A rewrite of an existing platform with the features renamed.
+  Anything requiring custom hardware or proprietary tools.
+
+================================================================
+7. WHAT YOU SUBMIT
+================================================================
+
+A public GitHub repo containing:
+
+  .dogfood.toml           tiers claimed, one line pitch, where things are
+  acceptance-report.txt   the output of run.py, tier by tier
+  docker-compose.yml      one command to a seeded, working portal
+  README.md               what it does, how to run, honest limitations
+  ARCHITECTURE.md         system design and rationale
+  DATA-MODEL.md           schema, import and export paths
+  JUDGING.md              assignment strategy, scoring math, the
+                          normalization method, defended
+  LICENSE                 MIT or Apache-2.0 preferred
+  src/                    all code written during the window
+  tests/                  your own test suite, beyond the acceptance one
+
+Plus a five minute demo video showing one full event lifecycle:
+create, submit, judge, publish.
+
+================================================================
+8. .dogfood.toml
+================================================================
+
+About ten lines at the root of your repo. It tells the acceptance
+checker where things are in your portal.
+
+Why it exists: forty teams are building forty different portals. If the
+organisers demanded a fixed set of routes they would be designing your
+API for you. So instead you build whatever you want, call your routes
+whatever you want, and write down where they ended up.
+
+  [portal]
+  base_url = "http://localhost:8080"
+
+  [tiers]
+  claimed = ["T1", "T2"]
+  pitch = "One sentence on what you built."
+
+  [auth]
+  # Whatever header proves you are this role. A cookie, a bearer token,
+  # a basic auth string. Your seed script prints these when the portal
+  # boots. The checker never logs in, it just attaches these.
+  organizer   = "Cookie: session=org_7f2a"
+  judge_a     = "Cookie: session=jdg_a_91bc"
+  judge_b     = "Cookie: session=jdg_b_44de"
+  participant = "Cookie: session=prt_2e88"
+
+  [routes]
+  gallery      = "/projects"
+  submit       = "/projects/new"
+  judge_scores = "/api/judge/scores"
+  peer_scores  = "/api/judge/scores?judge=judge_a"
+  csv_export   = "/api/export.csv"
+
+Notes:
+  The checker never logs in. Logging in is the one thing no two stacks
+  do alike, so you hand over a working header and the checker attaches
+  it. Your login page can work however you want.
+
+  peer_scores is the url that, in your portal, would return judge A's
+  scores. A query parameter, a path like /api/judges/jdg_01/scores,
+  anything. The checker visits it as judge B, who should be refused.
+
+  claimed is on your honour and it is checked. The checker prints what
+  it verified next to what you claimed.
+
+================================================================
+9. fixtures.json
+================================================================
+
+A file of invented hackathon data that every team loads into their
+portal, released at kickoff. Roughly 40 projects, 30 judges, 8 tracks.
+
+Why it exists: if everyone seeds their own demo data, a judge opening
+two portals is comparing test data, not software. Shared fixtures remove
+that. The file also contains awkward cases on purpose: a judge who gave
+every project the same score, two review batches nobody finished, and
+one duplicate submission.
+
+The real file is at https://dogfoodhack.com/spec/fixtures.json
+Here is a three record sample so the shape is readable at a glance:
+
+  {
+    "event": {
+      "id": "evt_01",
+      "name": "Sample Hack 2026",
+      "submissions_close": "2026-03-01T18:00:00Z"
+    },
+    "tracks":   [ { "id": "trk_01", "name": "Developer tools" } ],
+    "judges":   [ { "id": "jdg_01", "name": "Ada Okonkwo",
+                    "email": "ada@example.org", "tracks": ["trk_01"] } ],
+    "teams":    [ { "id": "tm_01", "name": "Nightshift",
+                    "members": ["ada@example.org"] } ],
+    "projects": [ { "id": "prj_01", "team": "tm_01", "track": "trk_01",
+                    "title": "Quiet Hours", "summary": "One line.",
+                    "repo_url": "https://example.org/repo",
+                    "submitted_at": "2026-02-28T22:14:00Z" } ],
+    "scores":   [ { "judge": "jdg_01", "project": "prj_01",
+                    "criteria": { "functionality": 4, "quality": 3 },
+                    "comment": "Text, sometimes empty." } ]
+  }
+
+Every id is a string. Every timestamp is ISO 8601 in UTC. Some score
+entries are missing on purpose, because not every judge finishes every
+batch. Your portal should not fall over when one project has two reviews
+and its neighbour has five.
+
+You do not have to store it in this shape. Load it, transform it, put it
+in whatever schema you can defend. The file is input, not your data
+model.
+
+================================================================
+10. THE ACCEPTANCE CHECKER
+================================================================
+
+One Python file, run.py. Any Python 3, standard library only, nothing to
+install. Keep fixtures.json next to it.
+
+  python3 run.py .dogfood.toml > acceptance-report.txt
+
+It makes seven requests to your running portal and prints a line each.
+
+T1  A stranger can browse the gallery.
+      GET {routes.gallery} with no auth header
+      expect 200
+
+T1  The gallery shows fixture projects.
+      GET {routes.gallery}
+      expect a known fixture project title in the body
+
+T1  A closed event refuses submissions.
+      POST {routes.submit} as participant
+      expect 4xx
+      The fixture event's submissions_close is a date in the past, so if
+      you seeded honestly your portal is already closed and this post
+      has to be refused. The checker does not manipulate a clock and
+      does not inspect why you refused.
+
+T2  A judge can read their own scores.
+      GET {routes.judge_scores} as judge_a
+      expect 200
+
+T2  A judge cannot read a peer's scores.   <-- the important one
+      GET {routes.peer_scores} as judge_b
+      expect 401 or 403
+      Hiding another judge's scores in your template is not refusing.
+      The check has to live in the backend, because the backend is where
+      curl arrives. This is the most common way a good looking project
+      loses points, and it usually takes one if statement to fix.
+
+T2  A participant is not a judge.
+      GET {routes.judge_scores} as participant
+      expect 401 or 403
+
+T2  An organizer can export CSV.
+      GET {routes.csv_export} as organizer
+      expect 200 and a CSV body
+
+That is the whole list.
+
+================================================================
+11. acceptance-report.txt
+================================================================
+
+Whatever run.py printed, redirected to a file and committed. There is
+nothing to write by hand and no format to follow.
+
+  DOGFOOD 2026 acceptance report
+  portal: http://localhost:8080
+  claimed: T1 T2
+  fixtures: fixtures.json
+
+  T1  gallery is public ................. PASS
+  T1  project from fixtures shown ....... PASS
+  T1  closed event refuses submissions .. PASS
+  T2  judge sees own scores ............. PASS
+  T2  judge cannot see peer scores ...... FAIL
+         GET http://localhost:8080/api/judge/scores?judge=judge_a
+         sent as judge_b; this is the url that returns judge_a's scores
+         got 200, wanted 401 or 403
+         the backend returned another judge's scores
+  T2  participant blocked ............... PASS
+  T2  csv export works .................. PASS
+
+  claimed T1 T2, verified T1
+  note: claimed but not verified: T2
+
+Commit the report even when it has failures in it. A report with two
+honest FAIL lines reads better than a README claiming everything works.
+Write the gaps into your README too. The organisers run the same
+checker, so there is no advantage in hiding anything.
+
+================================================================
+12. WHAT IS NOT CHECKED
+================================================================
+
+Your language. Your framework. Your database. Your ORM, or the absence
+of one. Your schema. Your route names. Your CSS, your component library,
+your lack of a component library. Your repo layout. Your commit style.
+Your branch names. Whether you wrote tests and how many. Whether you
+used Claude Code, Cursor, Copilot or none of them. How you split work
+between teammates. Whether you sleep.
+
+Advice from the organisers: pick what you know. A boring stack you are
+fluent in will get further in 72 hours than an exciting one you are
+learning.
+
+================================================================
+13. PRIZES
+================================================================
+
+  1st, Grand Prize        800 USD   the portal that gets forked and run
+  2nd, Runner Up          500 USD
+  3rd                     350 USD
+  4th                     200 USD
+  5th                     150 USD
+  Best Judging Engine     100 USD   most defensible assignment,
+                                    normalization and isolation
+  Write Up Quest          400 USD   4 x 100, closes 5 Oct 18:00 UTC
+
+Write Up Quest: publish a technical write up of your build process on
+any developer focused platform, tagged #DogfoodHackathon. Good topics
+are schema rework, normalization math, role isolation bugs, features you
+cut, designs you abandoned. Judged on insight and substance, not
+follower count.
+
+WHAT HAPPENS TO THE WINNER
+  You keep ownership. No assignment, no CLA.
+  Hackathon Raptors forks it, self hosts it and runs events on it.
+  Your team is credited on every event page it powers, permanently.
+  All fixes and improvements are upstreamed as pull requests.
+  If two entries are close they may adopt one and credit ideas from the
+  other, with public disclosure of what came from where.
+
+================================================================
+14. SUGGESTED STARTING POINTS
+================================================================
+
+  Full stack builders        T1 then T2
+  Backend and API engineers  T2 through T4
+  Frontend and design        T1 then T3
+  Data and algorithms        T2 plus the bonus challenges
+  Security engineers         T2 to T3 plus the Threat Model bonus
+  DevOps and self hosting    T1 with a focus on adoptability
+
+================================================================
+LINKS
+================================================================
+
+  Event site   https://dogfoodhack.com
+  This spec    https://dogfoodhack.com/spec
+  spec.md      https://dogfoodhack.com/spec/spec.md
+  run.py       https://dogfoodhack.com/spec/run.py
+  Example toml https://dogfoodhack.com/spec/example.dogfood.toml
+  Discord      https://discord.gg/xfYPDZYqeh
+
+END OF CONTEXT
+
+================================================================
+APPENDIX A. run.py, THE ACCEPTANCE CHECKER, IN FULL
+================================================================
+
+This is the exact program that produces acceptance-report.txt.
+It is the same program for every team. Judges also read the repo,
+the documentation and the demo video, so this is not the whole of
+the assessment, but nothing about it is hidden.
+
+#!/usr/bin/env python3
+"""DOGFOOD 2026 acceptance checker.
+
+Usage:  python3 run.py .dogfood.toml > acceptance-report.txt
+
+Any Python 3. Standard library only, nothing to install.
+"""
+
+import argparse
+import json
+import os
+import re
+import sys
+import urllib.error
+import urllib.request
+
+try:
+    import tomllib  # Python 3.11 and newer
+except ModuleNotFoundError:
+    tomllib = None
+
+
+def parse_toml(text):
+    """Enough TOML for .dogfood.toml, so older Pythons work too.
+
+    Handles [section] headers, key = "string", and key = ["a", "b"].
+    """
+    data, section = {}, None
+    for raw in text.splitlines():
+        line = raw.split("#")[0].strip()
+        if not line:
+            continue
+        head = re.fullmatch(r"\[([A-Za-z0-9_.]+)\]", line)
+        if head:
+            section = data.setdefault(head.group(1), {})
+            continue
+        key, sep, value = line.partition("=")
+        if not sep or section is None:
+            continue
+        key, value = key.strip(), value.strip()
+        if value.startswith("["):
+            items = re.findall(r'"([^"]*)"', value)
+            section[key] = items
+        else:
+            section[key] = value.strip().strip('"').strip("'")
+    return data
+
+
+def load_config(path):
+    if tomllib:
+        with open(path, "rb") as f:
+            return tomllib.load(f)
+    with open(path, encoding="utf-8") as f:
+        return parse_toml(f.read())
+
+TIERS = ["T1", "T2", "T3", "T4"]
+TIMEOUT = 10
+
+
+def request(url, header=None, method="GET", body=None):
+    """Return (status, text). Never raises on an HTTP error status."""
+    req = urllib.request.Request(url, method=method)
+    if header:
+        name, _, value = header.partition(":")
+        req.add_header(name.strip(), value.strip())
+    if body is not None:
+        req.data = json.dumps(body).encode()
+        req.add_header("Content-Type", "application/json")
+    try:
+        with urllib.request.urlopen(req, timeout=TIMEOUT) as resp:
+            return resp.status, resp.read().decode("utf-8", "replace")
+    except urllib.error.HTTPError as e:
+        return e.code, e.read().decode("utf-8", "replace")
+    except Exception as e:
+        return 0, f"{type(e).__name__}: {e}"
+
+
+class Check:
+    """One assertion. Collects its own failure detail as it runs."""
+
+    def __init__(self, tier, label):
+        self.tier = tier
+        self.label = label
+        self.ok = False
+        self.detail = []
+
+    def note(self, line):
+        self.detail.append(line)
+
+
+def build_checks(cfg, fixture):
+    base = cfg["portal"]["base_url"].rstrip("/")
+    auth = cfg.get("auth", {})
+    routes = cfg.get("routes", {})
+
+    def url(key, suffix=""):
+        return base + routes.get(key, "") + suffix
+
+    checks = []
+
+    # --- T1 -------------------------------------------------------------
+    c = Check("T1", "gallery is public")
+    status, body = request(url("gallery"))
+    c.ok = status == 200
+    if not c.ok:
+        c.note(f"GET {url('gallery')}")
+        c.note("no auth header")
+        c.note(f"got {status or 'no response'}, wanted 200")
+    gallery_body = body
+    checks.append(c)
+
+    c = Check("T1", "project from fixtures shown")
+    titles = fixture_titles(fixture)
+    haystack = gallery_body.lower()
+    c.ok = any(t.lower() in haystack for t in titles)
+    if not c.ok:
+        c.note(f"GET {url('gallery')}")
+        if titles:
+            c.note("looked for any of these fixture project titles: "
+                   + ", ".join(repr(t) for t in titles))
+            c.note("none of them appeared in the response body")
+            c.note("if your gallery paginates, make sure page one is what "
+                   "this route returns")
+        else:
+            c.note("no fixture file was loaded, so there was nothing to look for")
+    checks.append(c)
+
+    c = Check("T1", "closed event refuses submissions")
+    status, _ = request(
+        url("submit"),
+        header=auth.get("participant"),
+        method="POST",
+        body={"title": "dogfood-late-submission-probe", "summary": "probe"},
+    )
+    c.ok = 400 <= status < 500
+    if not c.ok:
+        c.note(f"POST {url('submit')}")
+        c.note("sent as participant; the fixture event closed "
+               f"{(fixture or {}).get('event', {}).get('submissions_close', 'in the past')}")
+        c.note(f"got {status or 'no response'}, wanted 4xx")
+    checks.append(c)
+
+    # --- T2 -------------------------------------------------------------
+    c = Check("T2", "judge sees own scores")
+    status, _ = request(url("judge_scores"), header=auth.get("judge_a"))
+    c.ok = status == 200
+    if not c.ok:
+        c.note(f"GET {url('judge_scores')}")
+        c.note("sent as judge_a")
+        c.note(f"got {status or 'no response'}, wanted 200")
+    checks.append(c)
+
+    c = Check("T2", "judge cannot see peer scores")
+    probe = base + routes.get("peer_scores", routes.get("judge_scores", ""))
+    status, _ = request(probe, header=auth.get("judge_b"))
+    c.ok = status in (401, 403)
+    if not c.ok:
+        c.note(f"GET {probe}")
+        c.note("sent as judge_b; this is the url that returns judge_a's scores")
+        c.note(f"got {status or 'no response'}, wanted 401 or 403")
+        if status == 200:
+            c.note("the backend returned another judge's scores")
+    checks.append(c)
+
+    c = Check("T2", "participant blocked")
+    status, _ = request(url("judge_scores"), header=auth.get("participant"))
+    c.ok = status in (401, 403)
+    if not c.ok:
+        c.note(f"GET {url('judge_scores')}")
+        c.note("sent as participant")
+        c.note(f"got {status or 'no response'}, wanted 401 or 403")
+    checks.append(c)
+
+    c = Check("T2", "csv export works")
+    status, body = request(url("csv_export"), header=auth.get("organizer"))
+    first_line = body.splitlines()[0] if body.splitlines() else ""
+    c.ok = status == 200 and "," in first_line
+    if not c.ok:
+        c.note(f"GET {url('csv_export')}")
+        c.note("sent as organizer")
+        if status != 200:
+            c.note(f"got {status or 'no response'}, wanted 200")
+        else:
+            c.note("got 200 but the first line has no comma in it")
+    checks.append(c)
+
+    return checks
+
+
+def fixture_titles(fixture, n=3):
+    projects = (fixture or {}).get("projects") or []
+    return [p.get("title", "") for p in projects[:n] if p.get("title")]
+
+
+def load_fixture(explicit, config_path):
+    """Look where a student would plausibly have put it."""
+    here = os.path.dirname(os.path.abspath(__file__))
+    beside_config = os.path.dirname(os.path.abspath(config_path))
+    candidates = [explicit] if explicit else [
+        "fixtures.json",
+        os.path.join(here, "fixtures.json"),
+        os.path.join(beside_config, "fixtures.json"),
+        os.path.join(beside_config, "data", "fixtures.json"),
+    ]
+    for c in candidates:
+        try:
+            with open(c, "rb") as f:
+                return json.load(f), c
+        except (FileNotFoundError, NotADirectoryError):
+            continue
+    return None, None
+
+
+def main():
+    ap = argparse.ArgumentParser(description="DOGFOOD 2026 acceptance checker")
+    ap.add_argument("config", help="path to .dogfood.toml")
+    ap.add_argument("--fixtures", default=None,
+                    help="path to fixtures.json (searched for if omitted)")
+    args = ap.parse_args()
+
+    cfg = load_config(args.config)
+
+    fixture, fixture_path = load_fixture(args.fixtures, args.config)
+    claimed = [t for t in cfg.get("tiers", {}).get("claimed", []) if t in TIERS]
+
+    print("DOGFOOD 2026 acceptance report")
+    print(f"portal: {cfg['portal']['base_url']}")
+    print(f"claimed: {' '.join(claimed) or 'nothing'}")
+    if fixture is None:
+        print("note: fixtures.json was not found, so the fixture content "
+              "check will fail. Put it next to run.py or pass its path.")
+    else:
+        print(f"fixtures: {fixture_path}")
+    print()
+
+    checks = build_checks(cfg, fixture)
+
+    width = max(len(c.label) for c in checks) + 2
+    for c in checks:
+        dots = "." * (width - len(c.label))
+        print(f"{c.tier}  {c.label} {dots} {'PASS' if c.ok else 'FAIL'}")
+        for line in c.detail:
+            print(f"       {line}")
+
+    verified = [t for t in TIERS
+                if any(c.tier == t for c in checks)
+                and all(c.ok for c in checks if c.tier == t)]
+    # a tier only counts if every tier below it also passed
+    solid = []
+    for t in TIERS:
+        if t in verified:
+            solid.append(t)
+        else:
+            break
+
+    print()
+    print(f"claimed {' '.join(claimed) or 'nothing'}, "
+          f"verified {' '.join(solid) or 'nothing'}")
+
+    overclaim = [t for t in claimed if t not in solid]
+    if overclaim:
+        print(f"note: claimed but not verified: {' '.join(overclaim)}")
+
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
+
+================================================================
+APPENDIX B. example.dogfood.toml, IN FULL
+================================================================
+
+# .dogfood.toml
+# Put this at the root of your repo. About ten lines.
+# Run the checker with:  python3 run.py .dogfood.toml
+
+[portal]
+# Where your portal is listening after `docker compose up`.
+base_url = "http://localhost:8080"
+
+[tiers]
+# The tiers you believe you finished. Honest claims only.
+claimed = ["T1", "T2"]
+pitch = "One sentence on what you built."
+
+[auth]
+# Whatever header proves you are this role. A cookie, a bearer token,
+# a basic auth string. Your seed script prints these when the portal
+# boots. The checker never logs in, it just attaches these.
+organizer   = "Cookie: session=org_7f2a"
+judge_a     = "Cookie: session=jdg_a_91bc"
+judge_b     = "Cookie: session=jdg_b_44de"
+participant = "Cookie: session=prt_2e88"
+
+[routes]
+# Your routes, whatever you called them.
+gallery      = "/projects"
+submit       = "/projects/new"
+judge_scores = "/api/judge/scores"
+# peer_scores is the url that would return judge_a's scores.
+# The checker visits it as judge_b, who should be refused.
+peer_scores  = "/api/judge/scores?judge=judge_a"
+csv_export   = "/api/export.csv"
+
+================================================================
+END OF CONTEXT
+================================================================
+
+That is everything: the brief, the checker's source, and the example
+configuration. Please answer using only what is above.</script>
+<script>
+(function(){
+  /* ---- the big context button ---- */
+  var cb = document.getElementById('ctxbtn'),
+      cd = document.getElementById('ctxdata'),
+      cw = document.getElementById('ctxwords'),
+      ctimer;
+  function ctxSay(msg, cls){
+    cb.querySelector('.lbl').textContent = msg;
+    cb.classList.toggle('ok', cls === 'ok');
+    clearTimeout(ctimer);
+    ctimer = setTimeout(function(){
+      cb.querySelector('.lbl').textContent = 'Copy everything';
+      cb.classList.remove('ok');
+    }, 2200);
+  }
+  if (cb && cd) {
+    if (cw) cw.textContent = cd.textContent.trim().split(/\s+/).length.toLocaleString();
+    cb.addEventListener('click', function(){
+      var text = cd.textContent.trim();
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(text).then(
+            function(){ ctxSay('Copied. Now paste it', 'ok'); },
+            function(){ ctxSay('Press Cmd C to copy'); ctxFallback(text); }
+          );
+          return;
+        }
+      } catch (e) { /* fall through */ }
+      ctxSay('Press Cmd C to copy');
+      ctxFallback(text);
+    });
+  }
+  function ctxFallback(text){
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly','');
+    ta.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0';
+    document.body.appendChild(ta);
+    ta.select(); ta.setSelectionRange(0, text.length);
+    try { document.execCommand('copy'); ctxSay('Copied. Now paste it','ok'); } catch(e){}
+    setTimeout(function(){ ta.remove(); }, 0);
+  }
+
+  /* ---- burger drawer ---- */
+  var burger = document.querySelector('.sp-burger'),
+      drawer = document.getElementById('sp-drawer'),
+      scrim  = document.querySelector('.sp-scrim');
+  function setNav(open){
+    drawer.classList.toggle('is-open', open);
+    if (scrim) scrim.classList.toggle('is-open', open);
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.documentElement.classList.toggle('nav-open', open);
+  }
+  if (burger) burger.addEventListener('click', function(){
+    setNav(burger.getAttribute('aria-expanded') !== 'true');
+  });
+  if (scrim) scrim.addEventListener('click', function(){ setNav(false); });
+  drawer && drawer.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){ setNav(false); });
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') setNav(false);
+  });
+
+  /* ---- copy buttons ----
+     Payload comes from the box's data-copy when present, otherwise the
+     <pre> text. Never innerText of a styled node with decoration in it. */
+  function payloadFor(box){
+    if (box.hasAttribute('data-copy')) return box.getAttribute('data-copy');
+    var pre = box.querySelector('pre');
+    return pre ? pre.textContent.replace(/\s+$/, '') : '';
+  }
+  function selectFallback(box){
+    var pre = box.querySelector('pre');
+    if (!pre || !window.getSelection) return;
+    var sel = window.getSelection(), r = document.createRange();
+    r.selectNodeContents(pre);
+    sel.removeAllRanges();
+    sel.addRange(r);
+  }
+  document.querySelectorAll('.cbox .cbtn, #repfig .cbtn').forEach(function(btn){
+    var box = btn.closest('.cbox, figure'), label = btn.textContent, timer;
+    btn.addEventListener('click', function(){
+      var text = payloadFor(box);
+      var done = function(){
+        btn.textContent = '[ Copied ]';
+        btn.classList.add('ok');
+        clearTimeout(timer);
+        timer = setTimeout(function(){
+          btn.textContent = label;
+          btn.classList.remove('ok');
+        }, 1500);
+      };
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(text).then(done, function(){
+            selectFallback(box);
+            btn.textContent = '[ Press Cmd C ]';
+            clearTimeout(timer);
+            timer = setTimeout(function(){ btn.textContent = label; }, 2500);
+          });
+          return;
+        }
+      } catch (e) { /* fall through */ }
+      selectFallback(box);
+      btn.textContent = '[ Press Cmd C ]';
+      clearTimeout(timer);
+      timer = setTimeout(function(){ btn.textContent = label; }, 2500);
+    });
+  });
+})();
+</script>
+</body>
+</html>
